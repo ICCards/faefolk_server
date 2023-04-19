@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://0v615dgnqcp1"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_8ul0h"]
+[ext_resource type="Script" path="res://NatureObjects.gd" id="2_f861o"]
+[ext_resource type="Script" path="res://Time.gd" id="2_u1lxl"]
+[ext_resource type="Script" path="res://PlaceableObjects.gd" id="4_ojb3n"]
+[ext_resource type="Script" path="res://ForageObjects.gd" id="5_g1d8e"]
+[ext_resource type="Script" path="res://GrassObjects.gd" id="6_miud8"]
+[ext_resource type="Script" path="res://ItemDrops.gd" id="7_so7i3"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_8ul0h")
+
+[node name="Players" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
+_spawnable_scenes = PackedStringArray("res://player_character.tscn")
+spawn_path = NodePath("..")
+
+[node name="NatureObjects" type="Node" parent="."]
+script = ExtResource("2_f861o")
+
+[node name="Time" type="Node" parent="."]
+script = ExtResource("2_u1lxl")
+
+[node name="Timer" type="Timer" parent="Time"]
+wait_time = 3.0
+
+[node name="PlaceableObjects" type="Node" parent="."]
+script = ExtResource("4_ojb3n")
+
+[node name="ForageObjects" type="Node" parent="."]
+script = ExtResource("5_g1d8e")
+
+[node name="GrassObjects" type="Node" parent="."]
+script = ExtResource("6_miud8")
+
+[node name="ItemDrops" type="Node" parent="."]
+script = ExtResource("7_so7i3")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ItemDrops"]
+_spawnable_scenes = PackedStringArray("res://ItemDrop/ItemDrop.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="timeout" from="Time/Timer" to="Time" method="_on_timer_timeout"]

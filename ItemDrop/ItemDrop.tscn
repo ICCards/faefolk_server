@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl4ak102pgvk0"]
+
+[ext_resource type="Script" path="res://ItemDrop/ItemDrop.gd" id="1_8p7fo"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5r8s2"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+
+[node name="ItemDrop" type="Node"]
+script = ExtResource("1_8p7fo")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_5r8s2")
