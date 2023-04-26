@@ -10,4 +10,5 @@ COPY . ./src
 RUN godot --path ./src --export-pack Linux /game/game.pck --headless && rm -r ./src
 
 EXPOSE 65124
+
 CMD [ "/opt/godot-server", "--main-pack", "/game/game.pck", "--headless" ]
