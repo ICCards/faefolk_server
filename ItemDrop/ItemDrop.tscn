@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dl4ak102pgvk0"]
+[gd_scene load_steps=12 format=3 uid="uid://dl4ak102pgvk0"]
 
 [ext_resource type="Script" path="res://ItemDrop/ItemDrop.gd" id="1_8p7fo"]
 
@@ -6,9 +6,216 @@
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
+properties/1/path = NodePath(".:item_name")
+properties/1/spawn = true
+properties/1/sync = false
+properties/2/path = NodePath(".:item_quantity")
+properties/2/spawn = true
+properties/2/sync = false
+properties/3/path = NodePath("CollisionShape2D:disabled")
+properties/3/spawn = true
+properties/3/sync = true
+properties/4/path = NodePath("Sprite2D:position")
+properties/4/spawn = true
+properties/4/sync = true
 
-[node name="ItemDrop" type="Node"]
+[sub_resource type="Animation" id="Animation_pye3l"]
+resource_name = "1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.87, 0.175),
+"update": 0,
+"values": [0.0, 24.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(0.574349, 1.86, 0.535, 2, 1),
+"update": 0,
+"values": [0.0, -14.0, 0.0, -8.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_k7l3f"]
+resource_name = "2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.87, 0.175),
+"update": 0,
+"values": [0.0, -24.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(0.5, 1.86, 0.535, 2, 1),
+"update": 0,
+"values": [0.0, -14.0, 0.0, -8.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_potjc"]
+resource_name = "3"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.87, 0.26525),
+"update": 0,
+"values": [0.0, 12.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(0.535887, 1.86, 0.267286, 2, 1),
+"update": 0,
+"values": [0.0, -14.0, -8.0, -12.0, -10.0]
+}
+
+[sub_resource type="Animation" id="Animation_ce3c4"]
+resource_name = "4"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.87, 0.26525),
+"update": 0,
+"values": [0.0, -12.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(0.535887, 1.86, 0.267286, 2, 1),
+"update": 0,
+"values": [0.0, -14.0, -8.0, -12.0, -10.0]
+}
+
+[sub_resource type="Animation" id="Animation_opxup"]
+resource_name = "5"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.87, 0.175),
+"update": 0,
+"values": [0.0, 4.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(0.574349, 1.86, 0.535, 2, 1),
+"update": 0,
+"values": [0.0, -12.0, -8.0, -12.0, -8.0]
+}
+
+[sub_resource type="Animation" id="Animation_7nnkc"]
+resource_name = "6"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.87, 0.175),
+"update": 0,
+"values": [0.0, -8.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(0.353553, 1.86, 0.535, 2, 1),
+"update": 0,
+"values": [0.0, -4.0, 2.0, 2.08165e-12, 4.0]
+}
+
+[sub_resource type="Animation" id="Animation_w28uy"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jjxd4"]
+_data = {
+"1": SubResource("Animation_pye3l"),
+"2": SubResource("Animation_k7l3f"),
+"3": SubResource("Animation_potjc"),
+"4": SubResource("Animation_ce3c4"),
+"5": SubResource("Animation_opxup"),
+"6": SubResource("Animation_7nnkc"),
+"RESET": SubResource("Animation_w28uy")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tippi"]
+radius = 5.0
+height = 10.0
+
+[node name="ItemDrop" type="CharacterBody2D"]
+position = Vector2(0, 2.08165e-12)
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_8p7fo")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_5r8s2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jjxd4")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_tippi")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, 4)

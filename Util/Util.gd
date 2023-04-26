@@ -57,9 +57,14 @@ func string_to_vector2(string) -> Vector2:
 
 	return string
 
+func isStorageItem(item_name):
+	if item_name == "crate" or item_name == "barrel" or item_name == "chest" or \
+	item_name == "tool cabinet" or item_name == "furnace" or item_name == "stove #1" or \
+	item_name == "stove #2" or item_name == "stove #3" or item_name == "grain mill #1" or \
+	item_name == "grain mill #2" or item_name == "grain mill #3" or item_name == "campfire":
+		return true
+	return false
 
-
-		
 func isFruitTree(tree_name):
 	if tree_name == "cherry" or tree_name == "apple" or tree_name == "plum" or tree_name == "pear":
 		return true

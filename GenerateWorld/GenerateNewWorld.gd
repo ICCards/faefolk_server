@@ -566,7 +566,7 @@ func create_ore_large(loc,biome):
 	var id = uuid.v4()
 	if check_64x64(loc) and isValidPosition(loc):
 		oreTypes.shuffle()
-		world[Util.return_chunk_from_location(loc)]["ore_large"][id] = {"l":loc,"h":Stats.LARGE_ORE_HEALTH,"b":biome,"v":oreTypes.front()}
+		world[Util.return_chunk_from_location(loc+Vector2i(1,0))]["ore_large"][id] = {"l":loc+Vector2i(1,0),"h":Stats.LARGE_ORE_HEALTH,"b":biome,"v":oreTypes.front()}
 		decoration_locations.append(loc)
 		decoration_locations.append(loc + Vector2i(1,0))
 		decoration_locations.append(loc + Vector2i(0,-1))
@@ -655,11 +655,11 @@ func create_tree(loc,biome):
 	if check_64x64(loc) and isValidPosition(loc):
 		treeTypes.shuffle()
 		var variety = treeTypes.front()
-		var chunk = Util.return_chunk_from_location(loc)
+		var chunk = Util.return_chunk_from_location(loc+Vector2i(1,0))
 		if Util.isNonFruitTree(variety):
-			world[chunk]["tree"][id] = {"l":loc,"h":Stats.TREE_HEALTH,"b":biome,"v":variety,"p":"5"}
+			world[chunk]["tree"][id] = {"l":loc+Vector2i(1,0),"h":Stats.TREE_HEALTH,"b":biome,"v":variety,"p":"5"}
 		else:
-			world[chunk]["tree"][id] = {"l":loc,"h":Stats.TREE_HEALTH,"b":biome,"v":variety,"p":"empty"}
+			world[chunk]["tree"][id] = {"l":loc+Vector2i(1,0),"h":Stats.TREE_HEALTH,"b":biome,"v":variety,"p":"empty"}
 		decoration_locations.append(loc)
 		decoration_locations.append(loc + Vector2i(1,0))
 		decoration_locations.append(loc + Vector2i(0,-1))
@@ -669,7 +669,7 @@ func create_stump(loc,biome):
 	var id = uuid.v4()
 	if check_64x64(loc) and isValidPosition(loc):
 		treeTypes.shuffle()
-		world[Util.return_chunk_from_location(loc)]["stump"][id] = {"l":loc,"h":Stats.STUMP_HEALTH,"b":biome,"v":treeTypes.front()}
+		world[Util.return_chunk_from_location(loc+Vector2i(1,0))]["stump"][id] = {"l":loc+Vector2i(1,0),"h":Stats.STUMP_HEALTH,"b":biome,"v":treeTypes.front()}
 		decoration_locations.append(loc)
 		decoration_locations.append(loc + Vector2i(1,0))
 		decoration_locations.append(loc + Vector2i(0,-1))

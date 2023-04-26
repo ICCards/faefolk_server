@@ -36,13 +36,10 @@ func _ready():
 			remove_player_character(peer_id)
 	)
 
-
-
 func start_server():
 	enet_peer.create_server(PORT)
 	multiplayer.multiplayer_peer = enet_peer
 	$Time/Timer.start()
-
 
 
 @rpc("call_remote")
@@ -56,16 +53,4 @@ func add_player_character(peer_id):
 
 func remove_player_character(peer_id):
 	$Players.get_node(str(peer_id)).queue_free()
-
-
-#func add_nature_objects():
-#	for id in world["tree"]:
-#		var nature_object = load("res://nature_object.tscn").instantiate()
-#		nature_object.variety = world["tree"][id]["v"]
-#		nature_object.location = world["tree"][id]["l"]
-#		nature_object.name = str(id)
-#		nature_object.set_multiplayer_authority(str(id).to_int())
-#		$NatureObjects.add_child(nature_object)
-
-
 

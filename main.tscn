@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://0v615dgnqcp1"]
+[gd_scene load_steps=9 format=3 uid="uid://0v615dgnqcp1"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_8ul0h"]
 [ext_resource type="Script" path="res://NatureObjects.gd" id="2_f861o"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://ForageObjects.gd" id="5_g1d8e"]
 [ext_resource type="Script" path="res://GrassObjects.gd" id="6_miud8"]
 [ext_resource type="Script" path="res://ItemDrops.gd" id="7_so7i3"]
+[ext_resource type="Script" path="res://FarmingTiles.gd" id="8_ap7b1"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_8ul0h")
@@ -41,5 +42,8 @@ script = ExtResource("7_so7i3")
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ItemDrops"]
 _spawnable_scenes = PackedStringArray("res://ItemDrop/ItemDrop.tscn")
 spawn_path = NodePath("..")
+
+[node name="FarmingTiles" type="Node" parent="."]
+script = ExtResource("8_ap7b1")
 
 [connection signal="timeout" from="Time/Timer" to="Time" method="_on_timer_timeout"]

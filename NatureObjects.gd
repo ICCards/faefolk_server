@@ -11,6 +11,8 @@ func nature_object_hit(peer_id,type,id,loc,tool_name):
 		else:
 			rpc("update_nature_health",{"player_id":peer_id, "type":type, "id":id, "chunk":chunk, "health":get_parent().world[chunk][type][id]["h"],"tool_name": tool_name})
 
+
+
 @rpc
 func destroy_nature_object(data): pass
 

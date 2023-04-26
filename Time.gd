@@ -1,6 +1,6 @@
 extends Node
 
-var minutes_increment = 5
+var minutes_increment = 15
 
 var week_days = ["Mon.","Tue.","Wed.","Thu.","Fri.","Sat.","Sun."]
 var seasons = ["spring", "summer", "fall", "winter"]
@@ -12,11 +12,7 @@ func _on_timer_timeout():
 		get_parent().server_data["time_minutes"] = 0
 		get_parent().server_data["time_hours"] += 1
 		if get_parent().server_data["time_hours"] == 6:
-			#PlayerData.emit_signal("set_day")
 			advance_crop_day()
-#		elif get_parent().world_data["time_hours"] == 22:
-#			#PlayerData.emit_signal("set_night")
-#			pass
 		elif get_parent().server_data["time_hours"] == 24:
 			advance_day()
 		elif get_parent().server_data["time_hours"] == 25:
