@@ -678,7 +678,7 @@ func create_stump(loc,biome):
 func create_log(loc,biome):
 	var id = uuid.v4()
 	if isValidPosition(loc):
-		world[Util.return_chunk_from_location(loc)][id] = {"l":loc,"h":1,"b":biome,"v":rng.randi_range(1,12)}
+		world[Util.return_chunk_from_location(loc)]["log"][id] = {"l":loc,"h":1,"b":biome,"v":rng.randi_range(1,12)}
 		decoration_locations.append(loc)
 
 func isValidPosition(loc):

@@ -28,7 +28,7 @@ func placeable_object_hit(peer_id,id,loc,tool_name):
 			get_parent().world[chunk]["placeable"][id]["h"] -= Stats.return_tool_damage(tool_name)
 		else:
 			if get_parent().server_data["ui_slots"].has(id):
-				if get_parent().server_data["ui_slots"][id].keys().size() > 0:
+				if get_parent().server_data["ui_slots"][id].keys().size() > 2:
 					get_parent().world[chunk]["placeable"][id]["h"] -= 1
 				else:
 					get_parent().world[chunk]["placeable"][id]["h"] = 0
@@ -39,8 +39,8 @@ func placeable_object_hit(peer_id,id,loc,tool_name):
 			rpc("destroy_placeable_object",{"player_id":peer_id, "id":id, "chunk":chunk})
 			if get_parent().server_data["ui_slots"].has(id):
 				for item in get_parent().server_data["ui_slots"][id].keys():
-					if item != "o" or item != "t":
-						get_node("../ItemDrops").add_item_drop([get_parent().server_data["ui_slots"][id][item]], loc*16)
+					if item != "o" and item != "t":
+						get_node("../ItemDrops").add_item_drop(get_parent().server_data["ui_slots"][id][item], loc*16)
 				get_parent().server_data["ui_slots"].erase(id)
 		else:
 			rpc("update_placeable_health",{"player_id":peer_id, "id":id, "chunk":chunk, "health":get_parent().world[chunk]["placeable"][id]["h"]})

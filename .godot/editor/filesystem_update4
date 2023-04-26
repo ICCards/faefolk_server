@@ -1,0 +1,3 @@
+res://main.tscn
+res://PlaceableObjects.gd
+res://GenerateWorld/GenerateNewWorld.gd
