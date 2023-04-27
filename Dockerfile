@@ -7,8 +7,8 @@ RUN wget https://downloads.tuxfamily.org/godotengine/4.0.2/Godot_v4.0.2-stable_l
 WORKDIR /game
 
 COPY . ./src
-RUN godot --path ./src --export-pack Linux /game/game.pck --headless && rm -r ./src
+RUN godot --headless --path ./src --export-release "Linux/X11" ./game
 
 EXPOSE 65124
 
-CMD [ "/opt/godot-server", "--main-pack", "/game/game.pck", "--headless" ]
+CMD [ "/opt/godot-server", "--main-pack", "/game/src/game.pck", "--headless" ]
