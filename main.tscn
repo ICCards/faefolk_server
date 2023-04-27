@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://0v615dgnqcp1"]
+[gd_scene load_steps=18 format=3 uid="uid://0v615dgnqcp1"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_8ul0h"]
 [ext_resource type="Script" path="res://NatureObjects.gd" id="2_f861o"]
@@ -8,6 +8,15 @@
 [ext_resource type="Script" path="res://GrassObjects.gd" id="6_miud8"]
 [ext_resource type="Script" path="res://ItemDrops.gd" id="7_so7i3"]
 [ext_resource type="Script" path="res://FarmingTiles.gd" id="8_ap7b1"]
+[ext_resource type="TileSet" uid="uid://3x3xfgwqdrhm" path="res://Assets/Tilesets/terrain/tres files/dirt.tres" id="9_g5oib"]
+[ext_resource type="TileSet" uid="uid://ceprqmvmkacdl" path="res://Assets/Tilesets/terrain/tres files/forest.tres" id="10_exxcs"]
+[ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/terrain/tres files/plains.tres" id="11_xn2u0"]
+[ext_resource type="TileSet" uid="uid://d2u2dc22ifh2g" path="res://Assets/Tilesets/terrain/tres files/snow.tres" id="12_1lmho"]
+[ext_resource type="TileSet" uid="uid://2bxso62kg8ee" path="res://Assets/Tilesets/terrain/tres files/wet sand.tres" id="13_e8dil"]
+[ext_resource type="TileSet" uid="uid://bpd6si5cldst7" path="res://Assets/Tilesets/terrain/tres files/deep ocean.tres" id="14_3h3x2"]
+[ext_resource type="TileSet" path="res://Assets/Tilesets/terrain/tres files/sand.tres" id="15_ol6xg"]
+[ext_resource type="TileSet" path="res://Assets/Themes/waves.tres" id="16_5k0ab"]
+[ext_resource type="TileSet" uid="uid://dja0b16fhgms6" path="res://Assets/Tilesets/terrain/tres files/freshwater.tres" id="17_d1h3o"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_8ul0h")
@@ -45,5 +54,43 @@ spawn_path = NodePath("..")
 
 [node name="FarmingTiles" type="Node" parent="."]
 script = ExtResource("8_ap7b1")
+
+[node name="TerrainTiles" type="Node2D" parent="."]
+
+[node name="Dirt" type="TileMap" parent="TerrainTiles"]
+tile_set = ExtResource("9_g5oib")
+format = 2
+
+[node name="Forest" type="TileMap" parent="TerrainTiles"]
+tile_set = ExtResource("10_exxcs")
+format = 2
+
+[node name="Plains" type="TileMap" parent="TerrainTiles"]
+tile_set = ExtResource("11_xn2u0")
+format = 2
+
+[node name="Snow" type="TileMap" parent="TerrainTiles"]
+tile_set = ExtResource("12_1lmho")
+format = 2
+
+[node name="WetSand" type="TileMap" parent="TerrainTiles"]
+tile_set = ExtResource("13_e8dil")
+format = 2
+
+[node name="DeepOcean" type="TileMap" parent="TerrainTiles"]
+tile_set = ExtResource("14_3h3x2")
+format = 2
+
+[node name="Sand" type="TileMap" parent="TerrainTiles"]
+tile_set = ExtResource("15_ol6xg")
+format = 2
+
+[node name="Waves" type="TileMap" parent="TerrainTiles"]
+tile_set = ExtResource("16_5k0ab")
+format = 2
+
+[node name="Freshwater" type="TileMap" parent="TerrainTiles"]
+tile_set = ExtResource("17_d1h3o")
+format = 2
 
 [connection signal="timeout" from="Time/Timer" to="Time" method="_on_timer_timeout"]

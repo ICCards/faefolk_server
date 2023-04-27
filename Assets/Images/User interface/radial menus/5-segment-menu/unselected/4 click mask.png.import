@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://cnvh0vn3tg7tv"
+path="res://.godot/imported/4 click mask.png-9d59e5f7970dd4ba847c855ff9bdda9a.res"
+
+[deps]
+
+source_file="res://Assets/Images/User interface/radial menus/5-segment-menu/unselected/4 click mask.png"
+dest_files=["res://.godot/imported/4 click mask.png-9d59e5f7970dd4ba847c855ff9bdda9a.res"]
+
+[params]
+
+create_from=0
+threshold=0.5
