@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://0v615dgnqcp1"]
+[gd_scene load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://main.gd" id="1_8ul0h"]
 [ext_resource type="Script" path="res://NatureObjects.gd" id="2_f861o"]
@@ -15,9 +15,9 @@
 [ext_resource type="TileSet" uid="uid://2bxso62kg8ee" path="res://Assets/Tilesets/terrain/tres files/wet sand.tres" id="13_e8dil"]
 [ext_resource type="TileSet" uid="uid://bpd6si5cldst7" path="res://Assets/Tilesets/terrain/tres files/deep ocean.tres" id="14_3h3x2"]
 [ext_resource type="TileSet" uid="uid://vhe3cpkl72vk" path="res://Assets/Tilesets/terrain/tres files/sand.tres" id="15_ol6xg"]
-[ext_resource type="TileSet" path="res://Assets/Themes/waves.tres" id="16_5k0ab"]
+[ext_resource type="TileSet" uid="uid://c0mxloskuawnh" path="res://Assets/Tilesets/terrain/tres files/waves.tres" id="16_5k0ab"]
 [ext_resource type="TileSet" uid="uid://dja0b16fhgms6" path="res://Assets/Tilesets/terrain/tres files/freshwater.tres" id="17_d1h3o"]
-[ext_resource type="TileSet" path="res://Assets/Tilesets/terrain/tres files/shallow ocean.tres" id="18_7iu4o"]
+[ext_resource type="TileSet" uid="uid://d0mkq6m6k1mo7" path="res://Assets/Tilesets/terrain/tres files/shallow ocean.tres" id="18_7iu4o"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_8ul0h")
