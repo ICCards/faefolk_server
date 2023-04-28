@@ -1,4 +1,9 @@
 class_name Cell
+var vector = Vector2i(0,0);
+var top_nieghbor_vector;
+var bottom_nieghbor_vector;
+var left_nieghbor_vector;
+var right_nieghbor_vector;
 var isCollaspsed = false;
 var options = [];
 

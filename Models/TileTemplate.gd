@@ -24,13 +24,13 @@ func analyze(tiles) :
 			top.append(tile)
 		#BOTTOM
 		if compare_edge(tile.edges[0],edges[1]):
-			top.append(tile)
+			bottom.append(tile)
 		#LEFT
 		if compare_edge(tile.edges[3],edges[2]):
-			top.append(tile)
+			left.append(tile)
 		#RIGHT
 		if compare_edge(tile.edges[2],edges[3]):
-			top.append(tile)
+			right.append(tile)
 		
 		
 		

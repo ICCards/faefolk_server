@@ -2,3 +2,4 @@ res://ItemDrop/ItemDrop.tscn
 res://Models/Cell.gd
 res://GenerateWorld/Generator.gd
 res://Models/TileTemplate.gd
+res://Templates.tscn
