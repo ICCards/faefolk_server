@@ -1,0 +1,54 @@
+[gd_scene load_steps=11 format=3 uid="uid://dtf3cpxqeq83m"]
+
+[ext_resource type="TileSet" uid="uid://3x3xfgwqdrhm" path="res://Assets/Tilesets/terrain/tres files/dirt.tres" id="1_0sdci"]
+[ext_resource type="TileSet" uid="uid://ceprqmvmkacdl" path="res://Assets/Tilesets/terrain/tres files/forest.tres" id="2_nbfsg"]
+[ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/terrain/tres files/plains.tres" id="3_dr6sj"]
+[ext_resource type="TileSet" uid="uid://d2u2dc22ifh2g" path="res://Assets/Tilesets/terrain/tres files/snow.tres" id="4_krsqf"]
+[ext_resource type="TileSet" uid="uid://2bxso62kg8ee" path="res://Assets/Tilesets/terrain/tres files/wet sand.tres" id="5_er8gi"]
+[ext_resource type="TileSet" uid="uid://bpd6si5cldst7" path="res://Assets/Tilesets/terrain/tres files/deep ocean.tres" id="6_5622i"]
+[ext_resource type="TileSet" uid="uid://vhe3cpkl72vk" path="res://Assets/Tilesets/terrain/tres files/sand.tres" id="7_hu454"]
+[ext_resource type="TileSet" uid="uid://c0mxloskuawnh" path="res://Assets/Tilesets/terrain/tres files/waves.tres" id="8_0oxks"]
+[ext_resource type="TileSet" uid="uid://dja0b16fhgms6" path="res://Assets/Tilesets/terrain/tres files/freshwater.tres" id="9_qioco"]
+[ext_resource type="TileSet" uid="uid://d0mkq6m6k1mo7" path="res://Assets/Tilesets/terrain/tres files/shallow ocean.tres" id="10_fji34"]
+
+[node name="TerrainTiles" type="Node2D"]
+
+[node name="Dirt" type="TileMap" parent="."]
+tile_set = ExtResource("1_0sdci")
+format = 2
+
+[node name="Forest" type="TileMap" parent="."]
+tile_set = ExtResource("2_nbfsg")
+format = 2
+
+[node name="Plains" type="TileMap" parent="."]
+tile_set = ExtResource("3_dr6sj")
+format = 2
+
+[node name="Snow" type="TileMap" parent="."]
+tile_set = ExtResource("4_krsqf")
+format = 2
+
+[node name="WetSand" type="TileMap" parent="."]
+tile_set = ExtResource("5_er8gi")
+format = 2
+
+[node name="DeepOcean" type="TileMap" parent="."]
+tile_set = ExtResource("6_5622i")
+format = 2
+
+[node name="Sand" type="TileMap" parent="."]
+tile_set = ExtResource("7_hu454")
+format = 2
+
+[node name="Waves" type="TileMap" parent="."]
+tile_set = ExtResource("8_0oxks")
+format = 2
+
+[node name="Freshwater" type="TileMap" parent="."]
+tile_set = ExtResource("9_qioco")
+format = 2
+
+[node name="ShallowOcean" type="TileMap" parent="."]
+tile_set = ExtResource("10_fji34")
+format = 2

@@ -54,3 +54,4 @@ func add_player_character(peer_id):
 func remove_player_character(peer_id):
 	$Players.get_node(str(peer_id)).queue_free()
 
+

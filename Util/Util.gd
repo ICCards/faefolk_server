@@ -65,6 +65,12 @@ func isStorageItem(item_name):
 		return true
 	return false
 
+func isCookingItem(item_name):
+	if item_name == "furnace" or item_name == "stove #1" or item_name == "stove #2" \
+	or item_name == "stove #3" or item_name == "campfire" or item_name == "barrel":
+		return true
+	return false
+
 func isFruitTree(tree_name):
 	if tree_name == "cherry" or tree_name == "apple" or tree_name == "plum" or tree_name == "pear":
 		return true

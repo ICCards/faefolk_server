@@ -11,8 +11,10 @@ func _on_timer_timeout():
 	if get_parent().server_data["time_minutes"] == 60:
 		get_parent().server_data["time_minutes"] = 0
 		get_parent().server_data["time_hours"] += 1
+		advance_crop_day()
 		if get_parent().server_data["time_hours"] == 6:
-			advance_crop_day()
+			#advance_crop_day()
+			pass
 		elif get_parent().server_data["time_hours"] == 24:
 			advance_day()
 		elif get_parent().server_data["time_hours"] == 25:

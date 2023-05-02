@@ -5,14 +5,17 @@ extends Node
 func player_place_object(player_id,type,id,data):
 	if type == "placeable":
 		if Util.isStorageItem(data["n"]):
-			get_parent().server_data["ui_slots"][id] = {"o":false,"t":0}
+			if Util.isCookingItem(data["n"]):
+				get_parent().server_data["ui_slots"][id] = {"tr":null,"lo":null}
+			else:
+				get_parent().server_data["ui_slots"][id] = {}
 	get_parent().world[Util.return_chunk_from_location(data["l"])][type][id] = data
 	rpc("add_new_object_to_world",player_id,type,id,data)
 
 
 @rpc("call_local", "any_peer", "unreliable")
-func player_remove_object(player_id,type,id,data):
-	var chunk = Util.return_chunk_from_location(data["l"])
+func player_remove_object(player_id,type,id,loc):
+	var chunk = Util.return_chunk_from_location(loc)
 	get_parent().world[chunk]["placeable"].erase(id)
 	rpc("destroy_placeable_object",{"player_id":player_id, "id":id, "chunk":chunk})
 	if get_parent().server_data["ui_slots"].has(id):
@@ -39,7 +42,7 @@ func placeable_object_hit(peer_id,id,loc,tool_name):
 			rpc("destroy_placeable_object",{"player_id":peer_id, "id":id, "chunk":chunk})
 			if get_parent().server_data["ui_slots"].has(id):
 				for item in get_parent().server_data["ui_slots"][id].keys():
-					if item != "o" and item != "t":
+					if item != "lo" and item != "tr":
 						get_node("../ItemDrops").add_item_drop(get_parent().server_data["ui_slots"][id][item], loc*16)
 				get_parent().server_data["ui_slots"].erase(id)
 		else:
@@ -51,8 +54,18 @@ func player_interact_with_object(data):
 	var chunk = Util.return_chunk_from_location(data["l"])
 	if get_parent().world[chunk]["placeable"].has(data["id"]):
 		get_parent().world[chunk]["placeable"][data["id"]]["o"] = not get_parent().world[chunk]["placeable"][data["id"]]["o"]
-		rpc("change_object_data",{"n":data["n"], "player_id":data["player_id"], "id":data["id"], "chunk":chunk, "o":get_parent().world[chunk]["placeable"][data["id"]]["o"]})
+		rpc("change_object_data",{"id":data["id"], "chunk":chunk, "o":get_parent().world[chunk]["placeable"][data["id"]]["o"]})
 
+
+@rpc("call_local", "any_peer", "unreliable")
+func send_updated_ui_slots(data):
+	if get_parent().server_data["ui_slots"].has(data["id"]):
+		get_parent().server_data["ui_slots"][data["id"]] = data["dict"]
+		rpc("update_ui_slots",data)
+
+
+@rpc
+func update_ui_slots(id,dict): pass
 
 @rpc 
 func change_object_data(data): pass
