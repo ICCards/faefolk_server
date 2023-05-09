@@ -133,6 +133,28 @@ func is_border_tile(_loc, _tiles):
 	return false
 
 
+func return_building_object_starting_health(item_name,tier):
+	match item_name:
+		"wood door":
+			return Stats.MAX_WOOD_DOOR
+		"metal door":
+			return Stats.MAX_METAL_DOOR
+		"armored door":
+			return Stats.MAX_ARMORED_DOOR
+		_:
+			match tier:
+				"twig":
+					return Stats.MAX_TWIG_BUILDING
+				"wood":
+					return Stats.MAX_WOOD_BUILDING
+				"stone":
+					return Stats.MAX_STONE_BUILDING
+				"metal":
+					return Stats.MAX_METAL_BUILDING
+				"armored":
+					return Stats.MAX_ARMORED_BUILDING
+
+
 func return_chunk_from_location(loc):
 	var column
 	var row

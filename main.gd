@@ -35,6 +35,8 @@ func _ready():
 			await get_tree().create_timer(1.0).timeout
 			remove_player_character(peer_id)
 	)
+	await get_tree().create_timer(2.0).timeout
+#	set_navigation_tiles()
 
 func start_server():
 	enet_peer.create_server(PORT)
@@ -50,8 +52,41 @@ func add_player_character(peer_id):
 	var player_character = load("res://player_character.tscn").instantiate()
 	player_character.set_multiplayer_authority(peer_id)
 	$Players.add_child(player_character)
+	Constants.player = player_character
+	
 
 func remove_player_character(peer_id):
 	$Players.get_node(str(peer_id)).queue_free()
 
+func add_mob():
+	var mob = load("res://World/Mobs/bear.tscn").instantiate()
+	$Mobs.add_child(mob)
+
+
+func set_navigation_tiles():
+	for x in range(250):
+		for y in range(250):
+			$NavigationTiles.set_cell(0,Vector2i(x,y),0,Vector2i(0,0),0)
+	await get_tree().create_timer(1.0).timeout
+	for x in range(250):
+		for y in range(250):
+			$NavigationTiles.set_cell(0,Vector2i(x,y)+Vector2i(250,0),0,Vector2i(0,0),0)
+	await get_tree().create_timer(1.0).timeout
+	for x in range(250):
+		for y in range(250):
+			$NavigationTiles.set_cell(0,Vector2i(x,y)+Vector2i(250,250),0,Vector2i(0,0),0)
+	await get_tree().create_timer(1.0).timeout
+	for x in range(250):
+		for y in range(250):
+			$NavigationTiles.set_cell(0,Vector2i(x,y)+Vector2i(0,250),0,Vector2i(0,0),0)
+	print("FINSIHED")
+			#await get_tree().process_frame
+
+
+@rpc ("call_local", "any_peer", "unreliable")
+func send_message(data): 
+	rpc("receive_message",data)
+	
+@rpc
+func receive_message(data): pass
 

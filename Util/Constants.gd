@@ -1,5 +1,6 @@
 extends Node
 
+var player
 
 const MIN_PLACE_OBJECT_DISTANCE = 50
 

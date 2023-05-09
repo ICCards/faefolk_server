@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://0v615dgnqcp1"]
+[gd_scene load_steps=14 format=3 uid="uid://0v615dgnqcp1"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_8ul0h"]
 [ext_resource type="Script" path="res://NatureObjects.gd" id="2_f861o"]
@@ -23,6 +23,11 @@ texture = ExtResource("9_1vyth")
 [sub_resource type="TileSet" id="TileSet_7m5tf"]
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_v25q6")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_88001"]
+vertices = PackedVector2Array(-87, -226, 1362, -182, 1471, 1024, -187, 958)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-87, -226, 1362, -182, 1471, 1024, -187, 958)])
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8ul0h")
@@ -58,14 +63,22 @@ script = ExtResource("7_so7i3")
 _spawnable_scenes = PackedStringArray("res://ItemDrop/ItemDrop.tscn")
 spawn_path = NodePath("..")
 
+[node name="Mobs" type="Node2D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Mobs"]
+_spawnable_scenes = PackedStringArray("res://World/Mobs/bear.tscn")
+spawn_path = NodePath("..")
+
 [node name="FarmingTiles" type="Node" parent="."]
 script = ExtResource("8_ap7b1")
 
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="TileMap" type="TileMap" parent="Node2D"]
+[node name="NavigationTiles" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_7m5tf")
 navigation_visibility_mode = 1
 format = 2
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_88001")
+enabled = false
 
 [connection signal="timeout" from="Time/Timer" to="Time" method="_on_timer_timeout"]

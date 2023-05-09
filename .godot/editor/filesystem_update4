@@ -1,18 +1,6 @@
 res://main.tscn
-res://Assets/Tilesets/terrain/tres files/dirt.tres
-res://Assets/Tilesets/terrain/tres files/forest.tres
-res://Assets/Tilesets/terrain/tres files/plains.tres
-res://Assets/Tilesets/terrain/tres files/snow.tres
-res://Assets/Tilesets/terrain/tres files/wet sand.tres
-res://Assets/Tilesets/terrain/tres files/deep ocean.tres
-res://Assets/Tilesets/terrain/tres files/sand.tres
-res://Assets/Tilesets/terrain/tres files/freshwater.tres
-res://Assets/Tilesets/terrain/tres files/shallow ocean.tres
-res://Assets/Tilesets/terrain/tres files/waves.tres
-res://ItemDrop/ItemDrop.tscn
 res://PlaceableObjects.gd
+res://World/Mobs/bear.tscn
+res://player_character.tscn
 res://main.gd
 res://Util/Util.gd
-res://NatureObjects.gd
-res://GenerateWorld/GenerateNewWorld.gd
-res://Time.gd
