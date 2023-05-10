@@ -6,6 +6,7 @@ var enet_peer = ENetMultiplayerPeer.new()
 
 var server_pop = int(OS.get_environment("pop"));
 var server_ip = "";
+var isPVP = bool(int(OS.get_environment("pvp")));
 var server_name = str(OS.get_environment("name"));
 var server_description = str(OS.get_environment("desc"));
 
@@ -18,6 +19,7 @@ var game_state: GameState
 
 func _ready():
 	server_ip = IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
+	print(isPVP)
 	print(server_pop)
 	print(server_ip)
 	print(server_name)
