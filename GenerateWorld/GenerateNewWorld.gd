@@ -184,7 +184,8 @@ func build_world():
 	#await get_tree().create_timer(1.0).timeout
 	#await get_tree().create_timer(1.0).timeout
 	## make faster
-	fix_tiles()
+	save_tiles_to_chunks()
+	print("WE Live BOYS")
 	##################
 
 func build_map():
@@ -390,48 +391,6 @@ func save_tiles_to_chunks():
 		world[chunk]["dirt"].append(loc)
 	print("NEW TERRAIN")
 	save_starting_world_data()
-
-
-func fix_tiles():
-	print("FIXING")
-	for tile_array in tile_arrays_to_fix: 
-		var tileThread = Thread.new()
-		threads.append(tileThread)
-		tileThread.start(Callable(self,"_fix_tiles").bind(tile_array))
-		
-func _fix_tiles(value):
-	print("start fixing")
-	var border_tiles = []
-#	for i in range(2):
-	border_tiles = []
-	for loc in value:
-		if Util.is_border_tile(loc, value):
-			border_tiles.append(loc)
-	for loc in border_tiles:
-		if not value.has(loc+Vector2i(1,0)):
-			value.append(loc+Vector2i(1,0))
-		if not value.has(loc+Vector2i(-1,0)):
-			value.append(loc+Vector2i(-1,0))
-		if not value.has(loc+Vector2i(0,1)):
-			value.append(loc+Vector2i(0,1))
-		if not value.has(loc+Vector2i(0,-1)):
-			value.append(loc+Vector2i(0,-1))
-		if not value.has(loc+Vector2i(1,1)):
-			value.append(loc+Vector2i(1,1))
-		if not value.has(loc+Vector2i(-1,1)):
-			value.append(loc+Vector2i(-1,1))
-		if not value.has(loc+Vector2i(1,-1)):
-			value.append(loc+Vector2i(1,-1))
-		if not value.has(loc+Vector2i(-1,-1)):
-			value.append(loc+Vector2i(-1,-1))
-	if thread_tile_counter == tile_arrays_to_fix.size():
-		print("fixed")
-		#call_deferred("build_world")
-		thread_tile_counter = 1
-		thread_world_update.start(Callable(self,"add_ocean_tiles"))
-	else:
-		thread_tile_counter += 1
-		print("fixing: "+str(thread_tile_counter))
 
 
 func save_starting_world_data():

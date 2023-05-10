@@ -21,3 +21,7 @@ Constants="*res://Util/Constants.gd"
 GenerateNewWorld="*res://GenerateWorld/GenerateNewWorld.gd"
 Stats="*res://Global/Data/Stats.gd"
 Util="*res://Util/Util.gd"
+
+[dotnet]
+
+project/assembly_name="faefolk_server"
