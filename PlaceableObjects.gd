@@ -1,5 +1,11 @@
 extends Node
 
+@rpc("call_local", "any_peer", "unreliable")
+func player_move_object(player_id,id,prev_object_data,data): 
+	get_parent().world[Util.return_chunk_from_location(prev_object_data["l"])]["placeable"].erase(id)
+	get_parent().world[Util.return_chunk_from_location(data["l"])]["placeable"][id] = data
+	rpc("place_object_in_new_location",player_id,id,prev_object_data,data)
+
 
 @rpc("call_local", "any_peer", "unreliable")
 func player_place_object(player_id,type,id,data):
@@ -58,11 +64,19 @@ func player_interact_with_object(data):
 
 
 @rpc("call_local", "any_peer", "unreliable")
-func send_updated_ui_slots(data):
-	if get_parent().server_data["ui_slots"].has(data["id"]):
-		get_parent().server_data["ui_slots"][data["id"]] = data["dict"]
-		rpc("update_ui_slots",data)
+func send_updated_ui_slots(id,data):
+	if get_parent().server_data["ui_slots"].has(id):
+		get_parent().server_data["ui_slots"][id] = data
+		rpc("update_ui_slots",id,data)
 
+#@rpc("call_local", "any_peer", "unreliable")
+#func set_new_object_tier(player_id,id,location,tier): 
+#	var chunk = Util.return_chunk_from_location(location)
+#	if get_parent().world[chunk]["placeable"].has(data["id"]):
+#		get_parent().world[chunk]["placeable"][id]["t"]
+
+@rpc
+func place_object_in_new_location(player_id,id,prev_object_data,data): pass
 
 @rpc
 func update_ui_slots(id,dict): pass
