@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Constants="*res://Util/Constants.gd"
-GenerateNewWorld="*res://GenerateWorld/GenerateNewWorld.gd"
 Stats="*res://Global/Data/Stats.gd"
 Util="*res://Util/Util.gd"
 

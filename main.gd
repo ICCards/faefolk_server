@@ -31,7 +31,7 @@ func _ready():
 		server_data = game_state.server_data
 		start_server()
 	else:
-		GenerateNewWorld.build()
+		$GenerateNewWorld.build()
 	enet_peer.peer_connected.connect(
 		func(new_peer_id):
 			if(connected_peer_ids.size() < server_pop):

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://main.gd" id="1_8ul0h"]
 [ext_resource type="Script" path="res://NatureObjects.gd" id="2_f861o"]
 [ext_resource type="Script" path="res://Time.gd" id="2_u1lxl"]
+[ext_resource type="PackedScene" uid="uid://6lbv0gsuwsbd" path="res://GenerateWorld/GenerateNewWorld.tscn" id="3_h114d"]
 [ext_resource type="Script" path="res://PlaceableObjects.gd" id="4_ojb3n"]
 [ext_resource type="Script" path="res://ForageObjects.gd" id="5_g1d8e"]
 [ext_resource type="Script" path="res://GrassObjects.gd" id="6_miud8"]
@@ -24,11 +25,6 @@ texture = ExtResource("9_1vyth")
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_v25q6")
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_88001"]
-vertices = PackedVector2Array(-87, -226, 1362, -182, 1471, 1024, -187, 958)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-87, -226, 1362, -182, 1471, 1024, -187, 958)])
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8ul0h")
 
@@ -40,6 +36,8 @@ spawn_path = NodePath("..")
 
 [node name="NatureObjects" type="Node" parent="."]
 script = ExtResource("2_f861o")
+
+[node name="GenerateNewWorld" parent="." instance=ExtResource("3_h114d")]
 
 [node name="Time" type="Node" parent="."]
 script = ExtResource("2_u1lxl")
@@ -77,8 +75,10 @@ tile_set = SubResource("TileSet_7m5tf")
 navigation_visibility_mode = 1
 format = 2
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_88001")
-enabled = false
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(113195, 65510)
+zoom = Vector2(0.002, 0.002)
+limit_left = 0
+limit_top = 0
 
 [connection signal="timeout" from="Time/Timer" to="Time" method="_on_timer_timeout"]
