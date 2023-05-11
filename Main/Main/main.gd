@@ -1,7 +1,7 @@
 extends Node
 
 
-const PORT = 65124
+const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
 
 #var server_pop = int(OS.get_environment("pop"));
@@ -48,7 +48,11 @@ func _ready():
 				await get_tree().create_timer(2.0).timeout
 				add_player_character(new_peer_id)
 				await get_tree().create_timer(1.0).timeout
-				rpc_id(new_peer_id,"send_world_data",{"world":world,"server_data":server_data,"terrain":terrain})
+				rpc_id(new_peer_id,"send_world_data","server_data",server_data)
+				for tile in terrain.keys():
+					rpc_id(new_peer_id,"send_world_data",tile,terrain[tile])
+				for chunk in world.keys():
+					rpc_id(new_peer_id,"send_world_data",chunk,world[chunk])
 	)
 	enet_peer.peer_disconnected.connect(
 		func(peer_id):
@@ -68,7 +72,7 @@ func start_server():
 
 
 @rpc("call_remote")
-func send_world_data(world):pass
+func send_world_data(type,data):pass
 
 func add_player_character(peer_id):
 	var player_character = load("res://Main/Player/player_character.tscn").instantiate()
