@@ -1,6 +1,6 @@
 extends Node
 
-var minutes_increment = 15
+var minutes_increment = 5
 
 var week_days = ["Mon.","Tue.","Wed.","Thu.","Fri.","Sat.","Sun."]
 var seasons = ["spring", "summer", "fall", "winter"]
