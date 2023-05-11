@@ -71,7 +71,7 @@ func start_server():
 func send_world_data(world):pass
 
 func add_player_character(peer_id):
-	var player_character = load("res://player_character.tscn").instantiate()
+	var player_character = load("res://Main/Player/player_character.tscn").instantiate()
 	player_character.set_multiplayer_authority(peer_id)
 	$Players.add_child(player_character)
 	Constants.player = player_character
