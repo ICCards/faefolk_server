@@ -32,8 +32,8 @@ var tile_arrays_to_fix: Array = [plains, forest, snow, dirt] #deep_ocean1, deep_
 var decoration_locations = []
 var occupied_terrain_tiles = []
 
-const width := 500
-const height := 500
+const width := 1000
+const height := 1000
 const MAX_GRASS_BUNCH_SIZE = 150
 var oreTypes = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "iron ore", "bronze ore", "iron ore", "gold ore"]
 var treeTypes = ['oak','spruce','birch','evergreen','pine','apple','plum','cherry','pear']
@@ -177,6 +177,15 @@ func build_world():
 	generate_weeds(plains,"plains")
 	generate_beach_forage(beach)
 	fix_tiles()
+	add_ocean_tiles()
+#	if thread_tile_counter == tile_arrays_to_fix.size():
+#		print("fixed")
+#		#call_deferred("build_world")
+#		thread_tile_counter = 1
+#		thread_world_update.start(Callable(self,"add_ocean_tiles"))
+#	else:
+#		thread_tile_counter += 1
+#		print("fixing: "+str(thread_tile_counter))
 	##################
 
 func build_map():
@@ -573,15 +582,6 @@ func _fix_tiles(value):
 			value.append(loc+Vector2i(1,-1))
 		if not value.has(loc+Vector2i(-1,-1)):
 			value.append(loc+Vector2i(-1,-1))
-	if thread_tile_counter == tile_arrays_to_fix.size():
-		print("fixed")
-		#call_deferred("build_world")
-		thread_tile_counter = 1
-		thread_world_update.start(Callable(self,"add_ocean_tiles"))
-	else:
-		thread_tile_counter += 1
-		print("fixing: "+str(thread_tile_counter))
-
 
 func save_starting_world_data():
 	print("SAVING")
