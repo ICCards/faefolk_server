@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://6lbv0gsuwsbd"]
-
-[ext_resource type="Script" path="res://GenerateWorld/GenerateNewWorld.gd" id="1_e5jem"]
-
-[node name="GenerateNewWorld" type="Node"]
-script = ExtResource("1_e5jem")

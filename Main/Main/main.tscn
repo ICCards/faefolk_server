@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://djtxaxfadtxf"]
+
+[ext_resource type="Script" path="res://Main/Main/main.gd" id="1_uqwkr"]
+[ext_resource type="Script" path="res://Main/World/NatureObjects.gd" id="2_c8lrs"]
+[ext_resource type="Script" path="res://Main/World/Time.gd" id="3_1dcut"]
+[ext_resource type="Script" path="res://Main/World/PlaceableObjects.gd" id="4_bwgs6"]
+[ext_resource type="Script" path="res://Main/World/ForageObjects.gd" id="5_jkprs"]
+[ext_resource type="Script" path="res://Main/World/GrassObjects.gd" id="6_kgtxj"]
+[ext_resource type="Script" path="res://Main/World/ItemDrops.gd" id="7_xmlu4"]
+[ext_resource type="Script" path="res://Main/World/FarmingTiles.gd" id="8_b43rv"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_uqwkr")
+
+[node name="Players" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
+spawn_path = NodePath("..")
+
+[node name="NatureObjects" type="Node" parent="."]
+script = ExtResource("2_c8lrs")
+
+[node name="Time" type="Node" parent="."]
+script = ExtResource("3_1dcut")
+
+[node name="Timer" type="Timer" parent="Time"]
+wait_time = 3.0
+
+[node name="PlaceableObjects" type="Node" parent="."]
+script = ExtResource("4_bwgs6")
+
+[node name="ForageObjects" type="Node" parent="."]
+script = ExtResource("5_jkprs")
+
+[node name="GrassObjects" type="Node" parent="."]
+script = ExtResource("6_kgtxj")
+
+[node name="ItemDrops" type="Node" parent="."]
+script = ExtResource("7_xmlu4")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ItemDrops"]
+_spawnable_scenes = PackedStringArray("res://Main/ItemDrop/ItemDrop.tscn")
+spawn_path = NodePath("..")
+
+[node name="Mobs" type="Node2D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Mobs"]
+_spawnable_scenes = PackedStringArray("res://Main/Mobs/bear.tscn")
+spawn_path = NodePath("..")
+
+[node name="FarmingTiles" type="Node" parent="."]
+script = ExtResource("8_b43rv")
+
+[connection signal="timeout" from="Time/Timer" to="Time" method="_on_timer_timeout"]
