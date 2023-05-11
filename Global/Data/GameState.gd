@@ -3,6 +3,7 @@ extends Resource
 class_name GameState
 
 @export var world = {}
+@export var terrain = {}
 @export var server_data = {}
 ## any other object here  and the the save and load methods that needs to be save
 
@@ -24,5 +25,6 @@ func load_state():
 		if game_State: #is GameState: # Check that the data is valid
 			server_data = game_State.server_data
 			world = game_State.world
+			terrain = game_State.terrain
 
 #		MapData.world = world_state

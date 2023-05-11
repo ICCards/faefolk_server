@@ -1,2 +1,12 @@
 res://main.tscn
 res://GenerateWorld/GenerateNewWorld.gd
+res://main.gd
+res://Global/Data/GameState.gd
+res://World/Mobs/bear.tscn
+res://player_character.tscn
+res://Global/Data/GenerateNewWorld.gd
+res://Main/Main/main.tscn
+res://Main/Mobs/bear.tscn
+res://Main/Player/player_character.tscn
+res://Main/ItemDrop/ItemDrop.tscn
+res://Main/World/ItemDrops.gd
