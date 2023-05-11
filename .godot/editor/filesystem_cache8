@@ -1,13 +1,13 @@
 fc8a56933c4b1c8d796fdb8f7a9f9475
-::res://::1683774894
+::res://::1683784686
 export_presets.cfg::TextFile::-1::1683725395::0::1::::<><>::
 FarmingTiles.gd::GDScript::-1::1683725395::0::1::::<>Node<>::
 ForageObjects.gd::GDScript::-1::1682379368::0::1::::<>Node<>::
 GrassObjects.gd::GDScript::-1::1683725395::0::1::::<>Node<>::
 icon.svg::CompressedTexture2D::6821490034845280112::1682379368::1683774291::1::::<><>::
 ItemDrops.gd::GDScript::-1::1683725395::0::1::::<>Node<>::
-main.gd::GDScript::-1::1683774840::0::1::::<>Node<>::
-main.tscn::PackedScene::1800003261828886768::1683774370::0::1::::<><>::res://main.gd<>res://NatureObjects.gd<>res://Time.gd<>uid://6lbv0gsuwsbd<>res://PlaceableObjects.gd<>res://ForageObjects.gd<>res://GrassObjects.gd<>res://ItemDrops.gd<>res://FarmingTiles.gd<>uid://nxbfcsoot5tk
+main.gd::GDScript::-1::1683784159::0::1::::<>Node<>::
+main.tscn::PackedScene::1800003261828886768::1683784168::0::1::::<><>::res://main.gd<>res://NatureObjects.gd<>res://Time.gd<>uid://6lbv0gsuwsbd<>res://PlaceableObjects.gd<>res://ForageObjects.gd<>res://GrassObjects.gd<>res://ItemDrops.gd<>res://FarmingTiles.gd<>uid://nxbfcsoot5tk
 MultiplayerSynchronizer.gd::GDScript::-1::1682379368::0::1::::<>MultiplayerSynchronizer<>::
 NatureObjects.gd::GDScript::-1::1683733014::0::1::::<>Node<>::
 nature_object.gd::GDScript::-1::1682379368::0::1::::<>Node<>::
@@ -65,7 +65,7 @@ waves.tres::TileSet::6553751889566799897::1683733014::0::1::::<><>::uid://nxbfcs
 wet sand 2.tres::TileSet::1898592575561083776::1682623309::0::1::::<><>::uid://nxbfcsoot5tk
 wet sand.tres::TileSet::1898592575561083776::1683733014::0::1::::<><>::uid://nxbfcsoot5tk
 ::res://GenerateWorld/::1683774427
-GenerateNewWorld.gd::GDScript::-1::1683774132::0::1::::<>Node<>::
+GenerateNewWorld.gd::GDScript::-1::1683784665::0::1::::<>Node<>::
 GenerateNewWorld.tscn::PackedScene::2198661849936460701::1683774132::0::1::::<><>::res://GenerateWorld/GenerateNewWorld.gd<>uid://nxbfcsoot5tk
 ::res://Global/::1683756982
 ::res://Global/Data/::1683243979

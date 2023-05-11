@@ -4,11 +4,17 @@ extends Node
 const PORT = 65124
 var enet_peer = ENetMultiplayerPeer.new()
 
-var server_pop = int(OS.get_environment("pop"));
+#var server_pop = int(OS.get_environment("pop"));
+#var server_ip = "";
+#var isPVP = bool(int(OS.get_environment("pvp")));
+#var server_name = str(OS.get_environment("name"));
+#var server_description = str(OS.get_environment("desc"));
+
+var server_pop = 50;
 var server_ip = "";
-var isPVP = bool(int(OS.get_environment("pvp")));
-var server_name = str(OS.get_environment("name"));
-var server_description = str(OS.get_environment("desc"));
+var isPVP = false;
+var server_name = "official";
+var server_description = "fun";
 
 var connected_peer_ids = []
 
@@ -46,8 +52,8 @@ func _ready():
 		func(peer_id):
 			print("PLAYER  " + str(peer_id) + " DISCONNECTED")
 			await get_tree().create_timer(1.0).timeout
-			var i = connected_peer_ids.find(peer_id)
-			connected_peer_ids.remove(i)
+			#var i = connected_peer_ids.find(peer_id)
+			#connected_peer_ids.remove(i)
 			remove_player_character(peer_id)
 	)
 	await get_tree().create_timer(2.0).timeout
