@@ -2,5 +2,5 @@ res://main.tscn
 res://PlaceableObjects.gd
 res://World/Mobs/bear.tscn
 res://player_character.tscn
-res://main.gd
-res://Util/Util.gd
+res://GenerateWorld/GenerateNewWorld.tscn
+res://GenerateWorld/GenerateNewWorld.gd

@@ -20,7 +20,7 @@ func _ready():
 		server_data = game_state.server_data
 		start_server()
 	else:
-		GenerateNewWorld.build()
+		$GenerateNewWorld.build()
 	enet_peer.peer_connected.connect(
 		func(new_peer_id):
 			print("PLAYER  " + str(new_peer_id) + " CONNECTED")
