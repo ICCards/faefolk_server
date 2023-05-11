@@ -42,8 +42,8 @@ var tile_arrays_to_fix: Array = [plains, forest, snow, dirt] #deep_ocean1, deep_
 var decoration_locations = []
 var occupied_terrain_tiles = []
 
-const width := 800
-const height := 800
+const width := 1000
+const height := 1000
 const MAX_GRASS_BUNCH_SIZE = 150
 var oreTypes = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "iron ore", "bronze ore", "iron ore", "gold ore"]
 var treeTypes = ['oak','spruce','birch','evergreen','pine','apple','plum','cherry','pear']
