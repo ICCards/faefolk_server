@@ -4,11 +4,17 @@ extends Node
 const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
 
-var server_pop = int(OS.get_environment("pop"));
+#var server_pop = int(OS.get_environment("pop"));
+#var server_ip = "";
+#var isPVP = bool(int(OS.get_environment("pvp")));
+#var server_name = str(OS.get_environment("name"));
+#var server_description = str(OS.get_environment("desc"));
+
+var server_pop = 20
 var server_ip = "";
-var isPVP = bool(int(OS.get_environment("pvp")));
-var server_name = str(OS.get_environment("name"));
-var server_description = str(OS.get_environment("desc"));
+var isPVP = false
+var server_name = "server name"
+var server_description = "desc"
 
 var connected_peer_ids = []
 
