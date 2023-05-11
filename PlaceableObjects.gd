@@ -70,6 +70,29 @@ func send_updated_ui_slots(id,data):
 		rpc("update_ui_slots",id,data)
 
 #@rpc("call_local", "any_peer", "unreliable")
+#func player_repair_object(data):
+#	var chunk = Util.return_chunk_from_location(data["l"])
+#	if get_parent().world[chunk]["placeable"].has(data["id"]):
+#		var tier = get_parent().world[chunk]["placeable"][data["id"]]["t"]
+#		get_parent().world[chunk]["placeable"][data["id"]]["h"] = Stats.return_max_building_health(tier)
+#		rpc("repair",{"c":chunk,"id":data["id"],"t":tier})
+#
+#@rpc("call_local", "any_peer", "unreliable")
+#func player_upgrade_object(data):
+#	var chunk = Util.return_chunk_from_location(data["l"])
+#	if get_parent().world[chunk]["placeable"].has(data["id"]):
+#		var new_tier = data["t"]
+#		get_parent().world[chunk]["placeable"][data["id"]]["t"] = new_tier
+#		get_parent().world[chunk]["placeable"][data["id"]]["h"] = Stats.return_max_building_health(new_tier)
+#		rpc("upgrade",{"c":chunk,"id":data["id"],"t":new_tier})
+#
+#@rpc 
+#func upgrade(data): pass
+#
+#@rpc
+#func repair(data): pass
+
+#@rpc("call_local", "any_peer", "unreliable")
 #func set_new_object_tier(player_id,id,location,tier): 
 #	var chunk = Util.return_chunk_from_location(location)
 #	if get_parent().world[chunk]["placeable"].has(data["id"]):

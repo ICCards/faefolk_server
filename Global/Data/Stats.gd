@@ -99,6 +99,19 @@ func return_starting_door_health(item_name):
 		"armored door":
 			return MAX_ARMORED_DOOR
 
+func return_max_building_health(tier):
+	match tier:
+		"twig":
+			return MAX_TWIG_BUILDING
+		"wood":
+			return MAX_WOOD_BUILDING
+		"stone":
+			return MAX_STONE_BUILDING
+		"metal":
+			return MAX_METAL_BUILDING
+		"armored":
+			return MAX_ARMORED_BUILDING
+
 func return_tool_damage(tool_name):
 	match tool_name:
 		"destruction potion I":

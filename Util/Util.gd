@@ -211,75 +211,48 @@ func return_chunk_from_location(loc):
 	return row+str(column)
 
 
-func return_autotile_id(autotile):
-	match autotile:
-		Vector2i(30,17):
-			return 0
-		Vector2i(24,14):
-			return 1
-		Vector2i(25,14):
-			return 2
-		Vector2i(25,15):
-			return 3
-		Vector2i(24,15):
-			return 4
-		Vector2i(30,16):
-			return 5
-		Vector2i(33,17):
-			return 6
-		Vector2i(30,20):
-			return 7
-		Vector2i(29,17):
-			return 8
-		Vector2i(29,16):
-			return 9
-		Vector2i(33,16):
-			return 10
-		Vector2i(33,20):
-			return 11
-		Vector2i(29,20):
-			return 12
-#	var array = [0,0,0,0,0,0,0,0]
-#	if tiles.has(loc+Vector2i(-1,-1)):
-#		array[0] = 1
-#	if tiles.has(loc+Vector2i(1,-1)):
-#		array[1] = 1
-#	if tiles.has(loc+Vector2i(1,1)):
-#		array[2] = 1
-#	if tiles.has(loc+Vector2i(-1,1)):
-#		array[3] = 1
-#	if tiles.has(loc+Vector2i(0,-1)):
-#		array[4] = 1
-#	if tiles.has(loc+Vector2i(1,0)):
-#		array[5] = 1
-#	if tiles.has(loc+Vector2i(0,1)):
-#		array[6] = 1
-#	if tiles.has(loc+Vector2i(-1,0)):
-#		array[7] = 1
-#	if array == [1,1,1,1,1,1,1,1]:
-#		return 0 
-#	elif array == [1,1,0,1,1,1,1,1]: # corners
-#		return 1
-#	elif array == [1,1,1,0,1,1,1,1]:
-#		return 2 
-#	elif array == [0,1,1,1,1,1,1,1]:
-#		return 3  
-#	elif array == [1,0,1,1,1,1,1,1]:
-#		return 4 
-#	elif array[2] == 1 and array[3] == 1 and array[5] == 1 and array[6] == 1 and array[7] == 1: # top side
-#		return 5
-#	elif array[0] == 1 and array[3] == 1 and array[4] == 1 and array[7] == 1 and array[6] == 1: # right side
-#		return 6
-#	elif array[0] == 1 and array[1] == 1 and array[4] == 1 and array[5] == 1 and array[7] == 1: # bottom side
-#		return 7
-#	elif array[1] == 1 and array[2] == 1 and array[4] == 1 and array[5] == 1 and array[6] == 1: # left side
-#		return 8
-#	elif array[2] == 1 and array[5] == 1 and array[6] == 1: # top left
-#		return 9
-#	elif array[3] == 1 and array[6] == 1 and array[7] == 1: # top right
-#		return 10 
-#	elif array[0] == 1 and array[4] == 1 and array[7] == 1: # bottom right
-#		return 11
-#	elif array[1] == 1 and array[4] == 1 and array[5] == 1: # bottom right
-#		return 12
-#	return null #INVALID
+func return_autotile_id(loc,tiles):
+	var array = [0,0,0,0,0,0,0,0]
+	if tiles.has(loc+Vector2i(-1,-1)):
+		array[0] = 1
+	if tiles.has(loc+Vector2i(1,-1)):
+		array[1] = 1
+	if tiles.has(loc+Vector2i(1,1)):
+		array[2] = 1
+	if tiles.has(loc+Vector2i(-1,1)):
+		array[3] = 1
+	if tiles.has(loc+Vector2i(0,-1)):
+		array[4] = 1
+	if tiles.has(loc+Vector2i(1,0)):
+		array[5] = 1
+	if tiles.has(loc+Vector2i(0,1)):
+		array[6] = 1
+	if tiles.has(loc+Vector2i(-1,0)):
+		array[7] = 1
+	if array == [1,1,1,1,1,1,1,1]:
+		return 0 
+	elif array == [1,1,0,1,1,1,1,1]: # corners
+		return 1
+	elif array == [1,1,1,0,1,1,1,1]:
+		return 2 
+	elif array == [0,1,1,1,1,1,1,1]:
+		return 3  
+	elif array == [1,0,1,1,1,1,1,1]:
+		return 4 
+	elif array[2] == 1 and array[3] == 1 and array[5] == 1 and array[6] == 1 and array[7] == 1: # top side
+		return 5
+	elif array[0] == 1 and array[3] == 1 and array[4] == 1 and array[7] == 1 and array[6] == 1: # right side
+		return 6
+	elif array[0] == 1 and array[1] == 1 and array[4] == 1 and array[5] == 1 and array[7] == 1: # bottom side
+		return 7
+	elif array[1] == 1 and array[2] == 1 and array[4] == 1 and array[5] == 1 and array[6] == 1: # left side
+		return 8
+	elif array[2] == 1 and array[5] == 1 and array[6] == 1: # top left
+		return 9
+	elif array[3] == 1 and array[6] == 1 and array[7] == 1: # top right
+		return 10 
+	elif array[0] == 1 and array[4] == 1 and array[7] == 1: # bottom right
+		return 11
+	elif array[1] == 1 and array[4] == 1 and array[5] == 1: # bottom right
+		return 12
+	return null #INVALID

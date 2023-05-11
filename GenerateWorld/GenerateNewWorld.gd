@@ -1,7 +1,5 @@
 extends Node
 
-@onready var tilemap = $TileMap
-
 var game_state: GameState
 
 var world = {}
@@ -309,138 +307,137 @@ func add_ocean_tiles():
 
 	
 func fix_and_assign_forest():
+	print("ASSIGN FOREST")
 	var invalid_tiles = []
-	tilemap.clear()
-	tilemap.set_cells_terrain_connect(0,forest,0,0)
 	for loc in forest:
-		var autotile_cord = tilemap.get_cell_atlas_coords(0,loc)
-		if autotile_cord.y == 13:
+		var autotile_id = Util.return_autotile_id(loc,forest)
+		print(autotile_id)
+		if not autotile_id:
 			invalid_tiles.append(loc)
-	if invalid_tiles.size() > 0:
-		print("NUM INVALID TILES forest" + str(invalid_tiles.size()))
-		for loc in invalid_tiles:
-			forest.erase(loc)
-		fix_and_assign_forest()
-		return
-	else:
-		for loc in forest:
-			var autotile_cord = tilemap.get_cell_atlas_coords(0,loc)
+		else:
 			var chunk = Util.return_chunk_from_location(loc)
-			world[chunk]["forest"][loc] = Util.return_autotile_id(autotile_cord)
-#		counter += 1
-#		if counter == tile_array_names.size():
+			world[chunk]["forest"][loc] = autotile_id
+	print("HERE")
+	if invalid_tiles.size() > 0:
+		for invalid_tile in invalid_tiles:
+			forest.erase(invalid_tile)
+		for invalid_tile in invalid_tiles:
+			for adjTile in randomAdjacentTiles:
+				var check_location = invalid_tile+adjTile
+				if forest.has(check_location):
+					var autotile_id = Util.return_autotile_id(check_location,forest)
+					var chunk = Util.return_chunk_from_location(check_location)
+					world[chunk]["forest"][check_location] = autotile_id
 	fix_and_assign_snow()
 	
 func fix_and_assign_snow():
+	print("ASSIGN Snow")
 	var invalid_tiles = []
-	tilemap.clear()
-	tilemap.set_cells_terrain_connect(0,snow,0,0)
 	for loc in snow:
-		var autotile_cord = tilemap.get_cell_atlas_coords(0,loc)
-		if autotile_cord.y == 13:
+		var autotile_id = Util.return_autotile_id(loc,snow)
+		if not autotile_id:
 			invalid_tiles.append(loc)
-	if invalid_tiles.size() > 0:
-		print("NUM INVALID TILES snow" + str(invalid_tiles.size()))
-		for loc in invalid_tiles:
-			snow.erase(loc)
-		fix_and_assign_snow()
-		return
-	else:
-		for loc in snow:
-			var autotile_cord = tilemap.get_cell_atlas_coords(0,loc)
+		else:
 			var chunk = Util.return_chunk_from_location(loc)
-			world[chunk]["snow"][loc] = Util.return_autotile_id(autotile_cord)
+			world[chunk]["snow"][loc] = autotile_id
+	if invalid_tiles.size() > 0:
+		for invalid_tile in invalid_tiles:
+			snow.erase(invalid_tile)
+		for invalid_tile in invalid_tiles:
+			for adjTile in randomAdjacentTiles:
+				var check_location = invalid_tile+adjTile
+				if snow.has(check_location):
+					var autotile_id = Util.return_autotile_id(check_location,snow)
+					var chunk = Util.return_chunk_from_location(check_location)
+					world[chunk]["snow"][check_location] = autotile_id
 	fix_and_assign_dirt()
 			
 func fix_and_assign_dirt():
+	print("ASSIGN dirt")
 	var invalid_tiles = []
-	tilemap.clear()
-	tilemap.set_cells_terrain_connect(0,dirt,0,0)
 	for loc in dirt:
-		var autotile_cord = tilemap.get_cell_atlas_coords(0,loc)
-		if autotile_cord.y == 13:
+		var autotile_id = Util.return_autotile_id(loc,dirt)
+		if not autotile_id:
 			invalid_tiles.append(loc)
-	if invalid_tiles.size() > 0:
-		print("NUM INVALID TILES dirt" + str(invalid_tiles.size()))
-		for loc in invalid_tiles:
-			dirt.erase(loc)
-		fix_and_assign_dirt()
-		return
-	else:
-		for loc in dirt:
-			var autotile_cord = tilemap.get_cell_atlas_coords(0,loc)
+		else:
 			var chunk = Util.return_chunk_from_location(loc)
-			world[chunk]["dirt"][loc] = Util.return_autotile_id(autotile_cord)
+			world[chunk]["dirt"][loc] = autotile_id
+	if invalid_tiles.size() > 0:
+		for invalid_tile in invalid_tiles:
+			dirt.erase(invalid_tile)
+		for invalid_tile in invalid_tiles:
+			for adjTile in randomAdjacentTiles:
+				var check_location = invalid_tile+adjTile
+				if dirt.has(check_location):
+					var autotile_id = Util.return_autotile_id(check_location,dirt)
+					var chunk = Util.return_chunk_from_location(check_location)
+					world[chunk]["dirt"][check_location] = autotile_id
 	fix_and_assign_plains()
 
 func fix_and_assign_plains():
+	print("plains")
 	var invalid_tiles = []
-	tilemap.clear()
-	tilemap.set_cells_terrain_connect(0,plains,0,0)
 	for loc in plains:
-		var autotile_cord = tilemap.get_cell_atlas_coords(0,loc)
-		if autotile_cord.y == 13:
+		var autotile_id = Util.return_autotile_id(loc,plains)
+		if not autotile_id:
 			invalid_tiles.append(loc)
-	if invalid_tiles.size() > 0:
-		print("NUM INVALID TILES plains" + str(invalid_tiles.size()))
-		for loc in invalid_tiles:
-			plains.erase(loc)
-		fix_and_assign_plains()
-		return
-	else:
-		for loc in plains:
-			var autotile_cord = tilemap.get_cell_atlas_coords(0,loc)
+		else:
 			var chunk = Util.return_chunk_from_location(loc)
-			world[chunk]["plains"][loc] = Util.return_autotile_id(autotile_cord)
+			world[chunk]["plains"][loc] = autotile_id
+	if invalid_tiles.size() > 0:
+		for invalid_tile in invalid_tiles:
+			plains.erase(invalid_tile)
+		for invalid_tile in invalid_tiles:
+			for adjTile in randomAdjacentTiles:
+				var check_location = invalid_tile+adjTile
+				if plains.has(check_location):
+					var autotile_id = Util.return_autotile_id(check_location,plains)
+					var chunk = Util.return_chunk_from_location(check_location)
+					world[chunk]["plains"][check_location] = autotile_id
 	fix_and_assign_wet_sand()
 
 func fix_and_assign_wet_sand():
+	print("wet sand")
 	var invalid_tiles = []
-	tilemap.clear()
-	await get_tree().create_timer(0.5).timeout
-	tilemap.set_cells_terrain_connect(0,wet_sand,0,0)
-	await get_tree().create_timer(0.5).timeout
 	for loc in wet_sand:
-		var autotile_cord = tilemap.get_cell_atlas_coords(0,loc)
-		if autotile_cord.y == 13:
+		var autotile_id = Util.return_autotile_id(loc,wet_sand)
+		if not autotile_id:
 			invalid_tiles.append(loc)
-	if invalid_tiles.size() > 0:
-		print("NUM INVALID TILES wet_sand" + str(invalid_tiles.size()))
-		for loc in invalid_tiles:
-			wet_sand.erase(loc)
-			if not beach.has(loc):
-				beach.append(loc)
-		fix_and_assign_wet_sand()
-		return
-	else:
-		for loc in wet_sand:
-			var autotile_cord = tilemap.get_cell_atlas_coords(0,loc)
+		else:
 			var chunk = Util.return_chunk_from_location(loc)
-			world[chunk]["wet_sand"][loc] = Util.return_autotile_id(autotile_cord)
+			world[chunk]["wet_sand"][loc] = autotile_id
+	if invalid_tiles.size() > 0:
+		for invalid_tile in invalid_tiles:
+			wet_sand.erase(invalid_tile)
+		for invalid_tile in invalid_tiles:
+			for adjTile in randomAdjacentTiles:
+				var check_location = invalid_tile+adjTile
+				if wet_sand.has(check_location):
+					var autotile_id = Util.return_autotile_id(check_location,wet_sand)
+					var chunk = Util.return_chunk_from_location(check_location)
+					world[chunk]["wet_sand"][check_location] = autotile_id
 	fix_and_assign_ocean()
 			
 func fix_and_assign_ocean():
+	print("ocean")
 	var invalid_tiles = []
-	tilemap.clear()
-	await get_tree().create_timer(0.5).timeout
-	tilemap.set_cells_terrain_connect(0,ocean,0,0)
-	await get_tree().create_timer(0.5).timeout
 	for loc in ocean:
-		var autotile_cord = tilemap.get_cell_atlas_coords(0,loc)
-		if autotile_cord.y == 13:
+		var autotile_id = Util.return_autotile_id(loc,ocean)
+		if not autotile_id:
 			invalid_tiles.append(loc)
-	if invalid_tiles.size() > 0:
-		print("NUM INVALID TILES ocean" + str(invalid_tiles.size()))
-		for loc in invalid_tiles:
-			ocean.erase(loc)
-			beach.append(loc)
-		fix_and_assign_ocean()
-		return
-	else:
-		for loc in ocean:
-			var autotile_cord = tilemap.get_cell_atlas_coords(0,loc)
+		else:
 			var chunk = Util.return_chunk_from_location(loc)
-			world[chunk]["ocean"][loc] = Util.return_autotile_id(autotile_cord)
+			world[chunk]["ocean"][loc] = autotile_id
+	if invalid_tiles.size() > 0:
+		for invalid_tile in invalid_tiles:
+			ocean.erase(invalid_tile)
+		for invalid_tile in invalid_tiles:
+			for adjTile in randomAdjacentTiles:
+				var check_location = invalid_tile+adjTile
+				if ocean.has(check_location):
+					var autotile_id = Util.return_autotile_id(check_location,ocean)
+					var chunk = Util.return_chunk_from_location(check_location)
+					world[chunk]["ocean"][check_location] = autotile_id
 	fix_and_assign_deep_ocean()
 
 func fix_and_assign_deep_ocean():
@@ -784,14 +781,15 @@ func generate_trees(locations,biome):
 	print(NUM_TREES)
 	print(NUM_STUMPS)
 	print(NUM_LOGS)
-	for _i in range(NUM_TREES):
-		var index = rng.randi_range(0, locations.size() - 1)
-		var location = locations[index]
-		create_tree(location,biome)
-	for _i in range(NUM_STUMPS):
-		var index = rng.randi_range(0, locations.size() - 1)
-		var location = locations[index]
-		create_stump(location,biome)
+	if not biome == "desert":
+		for _i in range(NUM_TREES):
+			var index = rng.randi_range(0, locations.size() - 1)
+			var location = locations[index]
+			create_tree(location,biome)
+		for _i in range(NUM_STUMPS):
+			var index = rng.randi_range(0, locations.size() - 1)
+			var location = locations[index]
+			create_stump(location,biome)
 	for _i in range(NUM_LOGS):
 		var index = rng.randi_range(0, locations.size() - 1)
 		var location = locations[index]
@@ -825,7 +823,10 @@ func create_stump(loc,biome):
 func create_log(loc,biome):
 	var id = uuid.v4()
 	if isValidPosition(loc):
-		world[Util.return_chunk_from_location(loc)]["log"][id] = {"l":loc,"h":1,"b":biome,"v":rng.randi_range(1,12)}
+		if biome == "desert":
+			world[Util.return_chunk_from_location(loc)]["log"][id] = {"l":loc,"h":1,"b":biome,"v":rng.randi_range(1,5)}
+		else:
+			world[Util.return_chunk_from_location(loc)]["log"][id] = {"l":loc,"h":1,"b":biome,"v":rng.randi_range(1,12)}
 		decoration_locations.append(loc)
 
 func isValidPosition(loc):

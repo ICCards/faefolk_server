@@ -3,5 +3,3 @@ res://PlaceableObjects.gd
 res://World/Mobs/bear.tscn
 res://player_character.tscn
 res://GenerateWorld/GenerateNewWorld.tscn
-res://GenerateWorld/GenerateNewWorld.gd
-res://main.gd
