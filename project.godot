@@ -11,15 +11,15 @@ config_version=5
 [application]
 
 config/name="faefolk_server"
-run/main_scene="res://main.tscn"
+run/main_scene="res://Main/Main/main.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
-config/icon="res://icon.svg"
 
 [autoload]
 
-Constants="*res://Util/Constants.gd"
+Constants="*res://Global/Data/Constants.gd"
 Stats="*res://Global/Data/Stats.gd"
-Util="*res://Util/Util.gd"
+Util="*res://Global/helpers/Util.gd"
+GenerateNewWorld="*res://Global/Data/GenerateNewWorld.gd"
 
 [dotnet]
 
