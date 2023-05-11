@@ -1,7 +1,7 @@
 extends Node
 
 
-const PORT = 9999
+const PORT = 65124
 var enet_peer = ENetMultiplayerPeer.new()
 
 #var server_pop = int(OS.get_environment("pop"));
