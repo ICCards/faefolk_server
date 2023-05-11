@@ -10,7 +10,7 @@ enum Btn {ClickToUpdateTexture}
 @export var click_to_update_texture: bool = false : set = _update_texture
 
 @export var type: GradientType = GradientType.LINEAR : set = set_type
-@export var size = Vector2(1000, 1000) : set = set_size
+@export var size = Vector2i(1000, 1000) : set = set_size
 @export var gradient: Gradient : set = set_gradient
 
 var data: Image
@@ -25,7 +25,7 @@ func _init():
 func _update():
 	if not gradient:
 		return
-	var radius = (size - Vector2(1.0, 1.0)) / 2
+	var radius = (size - Vector2i(1.0, 1.0)) / 2
 	var ratio = size.x / size.y
 	if type == GradientType.LINEAR:
 		for x in range(size.x):
