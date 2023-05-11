@@ -4,6 +4,12 @@ extends Node
 const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
 
+var server_pop = int(OS.get_environment("pop"));
+var server_ip = "";
+var isPVP = bool(int(OS.get_environment("pvp")));
+var server_name = str(OS.get_environment("name"));
+var server_description = str(OS.get_environment("desc"));
+
 var connected_peer_ids = []
 
 var server_data = {}
@@ -11,8 +17,13 @@ var world = {}
 
 var game_state: GameState
 
-
 func _ready():
+	server_ip = IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
+	print(isPVP)
+	print(server_pop)
+	print(server_ip)
+	print(server_name)
+	print(server_description)
 	if GameState.save_exists(): # Load world
 		game_state = GameState.new()
 		game_state.load_state()
@@ -20,19 +31,23 @@ func _ready():
 		server_data = game_state.server_data
 		start_server()
 	else:
-		GenerateNewWorld.build()
+		$GenerateNewWorld.build()
 	enet_peer.peer_connected.connect(
 		func(new_peer_id):
-			print("PLAYER  " + str(new_peer_id) + " CONNECTED")
-			await get_tree().create_timer(2.0).timeout
-			add_player_character(new_peer_id)
-			await get_tree().create_timer(1.0).timeout
-			rpc_id(new_peer_id,"send_world_data",{"world":world,"server_data":server_data})
+			if(connected_peer_ids.size() < server_pop):
+				print("PLAYER  " + str(new_peer_id) + " CONNECTED")
+				connected_peer_ids.append(new_peer_id)
+				await get_tree().create_timer(2.0).timeout
+				add_player_character(new_peer_id)
+				await get_tree().create_timer(1.0).timeout
+				rpc_id(new_peer_id,"send_world_data",{"world":world,"server_data":server_data})
 	)
 	enet_peer.peer_disconnected.connect(
 		func(peer_id):
 			print("PLAYER  " + str(peer_id) + " DISCONNECTED")
 			await get_tree().create_timer(1.0).timeout
+			var i = connected_peer_ids.find(peer_id)
+			connected_peer_ids.remove(i)
 			remove_player_character(peer_id)
 	)
 	await get_tree().create_timer(2.0).timeout
@@ -48,13 +63,11 @@ func start_server():
 func send_world_data(world):pass
 
 func add_player_character(peer_id):
-	connected_peer_ids.append(peer_id)
 	var player_character = load("res://player_character.tscn").instantiate()
 	player_character.set_multiplayer_authority(peer_id)
 	$Players.add_child(player_character)
 	Constants.player = player_character
 	
-
 func remove_player_character(peer_id):
 	$Players.get_node(str(peer_id)).queue_free()
 

@@ -1,6 +1,11 @@
 res://main.tscn
 res://PlaceableObjects.gd
+<<<<<<< HEAD
 res://World/Mobs/bear.tscn
 res://player_character.tscn
+res://GenerateWorld/GenerateNewWorld.tscn
+res://GenerateWorld/GenerateNewWorld.gd
+=======
 res://main.gd
-res://Util/Util.gd
+res://Global/Functions/maujoe.custom_gradient_texture/custom_gradient_texture.gd
+>>>>>>> 72a0622f03d44fb8208949167cd2292f74bafab2
