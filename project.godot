@@ -24,3 +24,7 @@ GenerateNewWorld="*res://Global/Data/GenerateNewWorld.gd"
 [dotnet]
 
 project/assembly_name="faefolk_server"
+
+[network]
+
+limits/packet_peer_stream/max_buffer_po2=64
