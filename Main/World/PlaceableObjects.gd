@@ -69,11 +69,20 @@ func send_updated_ui_slots(id,data):
 		get_parent().server_data["ui_slots"][id] = data
 		rpc("update_ui_slots",id,data)
 
-#@rpc("call_local", "any_peer", "unreliable")
-#func set_new_object_tier(player_id,id,location,tier): 
-#	var chunk = Util.return_chunk_from_location(location)
-#	if get_parent().world[chunk]["placeable"].has(data["id"]):
-#		get_parent().world[chunk]["placeable"][id]["t"]
+@rpc("call_local", "any_peer", "unreliable")
+func player_repair_object(data): 
+	var chunk = Util.return_chunk_from_location(data["l"])
+	if get_parent().world[chunk]["placeable"].has(data["id"]):
+		var item_name = get_parent().world[chunk]["placeable"][data["id"]]["n"]
+		if item_name == "foundation" or item_name == "wall": 
+			var current_tier = get_parent().world[chunk]["placeable"][data["id"]]["t"] 
+			get_parent().world[chunk]["placeable"][data["id"]]["h"] = Stats.return_max_building_health(current_tier)
+		else:
+			get_parent().world[chunk]["placeable"][data["id"]]["h"] = Stats.return_max_door_health(item_name)
+		rpc("repair",data)
+
+@rpc
+func repair(data): pass
 
 @rpc
 func place_object_in_new_location(player_id,id,prev_object_data,data): pass
