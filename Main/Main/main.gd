@@ -48,11 +48,11 @@ func _ready():
 				await get_tree().create_timer(2.0).timeout
 				add_player_character(new_peer_id)
 				await get_tree().create_timer(1.0).timeout
-				rpc_id(new_peer_id,"send_world_data","server_data",server_data)
-				for tile in terrain.keys():
-					rpc_id(new_peer_id,"send_world_data",tile,terrain[tile])
+				#rpc_id(new_peer_id,"send_world_data","server_data",server_data)
+				#for tile in terrain.keys():
+				#	rpc_id(new_peer_id,"send_world_data",tile,terrain[tile])
 				#for chunk in world.keys():
-					#rpc_id(new_peer_id,"send_world_data",chunk,world[chunk])
+				#	rpc_id(new_peer_id,"send_world_data",chunk,world[chunk])
 	)
 	enet_peer.peer_disconnected.connect(
 		func(peer_id):
