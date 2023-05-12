@@ -9,6 +9,6 @@ WORKDIR /game
 COPY . ./src
 RUN godot --headless --path ./src --export-release "Linux/X11" ./game
 
-EXPOSE 65124
+EXPOSE 65124 8080
 
 CMD [ "/opt/godot-server", "--main-pack", "/game/src/game.pck", "--headless" ]
