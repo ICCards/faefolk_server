@@ -51,8 +51,8 @@ func _ready():
 				rpc_id(new_peer_id,"send_world_data","server_data",server_data)
 				for tile in terrain.keys():
 					rpc_id(new_peer_id,"send_world_data",tile,terrain[tile])
-				for chunk in world.keys():
-					rpc_id(new_peer_id,"send_world_data",chunk,world[chunk])
+				#for chunk in world.keys():
+					#rpc_id(new_peer_id,"send_world_data",chunk,world[chunk])
 	)
 	enet_peer.peer_disconnected.connect(
 		func(peer_id):
