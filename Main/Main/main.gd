@@ -3,7 +3,7 @@ extends Node
 
 const PORT = 65124
 var enet_peer = ENetMultiplayerPeer.new()
-
+var httpserver = HttpServer.new()
 #var server_pop = int(OS.get_environment("pop"));
 #var server_ip = "";
 #var isPVP = bool(int(OS.get_environment("pvp")));
@@ -48,11 +48,6 @@ func _ready():
 				await get_tree().create_timer(2.0).timeout
 				add_player_character(new_peer_id)
 				await get_tree().create_timer(1.0).timeout
-				#rpc_id(new_peer_id,"send_world_data","server_data",server_data)
-				#for tile in terrain.keys():
-				#	rpc_id(new_peer_id,"send_world_data",tile,terrain[tile])
-				#for chunk in world.keys():
-				#	rpc_id(new_peer_id,"send_world_data",chunk,world[chunk])
 	)
 	enet_peer.peer_disconnected.connect(
 		func(peer_id):
@@ -68,11 +63,10 @@ func _ready():
 func start_server():
 	enet_peer.create_server(PORT)
 	multiplayer.multiplayer_peer = enet_peer
+	httpserver.register_router("/getData", HttpManager.new(world,terrain,server_data))
+	add_child(httpserver)
+	httpserver.start()
 	$Time/Timer.start()
-
-
-@rpc("call_remote")
-func send_world_data(type,data):pass
 
 func add_player_character(peer_id):
 	var player_character = load("res://Main/Player/player_character.tscn").instantiate()

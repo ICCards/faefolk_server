@@ -1,4 +1,6 @@
 res://Main/Main/main.tscn
+res://Main/HTTP/Router.gd
+res://Main/Main/main.gd
 res://Main/Mobs/bear.tscn
 res://Main/Player/player_character.tscn
 res://Main/ItemDrop/ItemDrop.tscn
