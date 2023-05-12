@@ -25,6 +25,10 @@ GenerateNewWorld="*res://Global/Data/GenerateNewWorld.gd"
 
 project/assembly_name="faefolk_server"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godottpd/plugin.cfg")
+
 [network]
 
 limits/packet_peer_stream/max_buffer_po2=64
