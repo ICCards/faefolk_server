@@ -81,6 +81,17 @@ func player_repair_object(data):
 			get_parent().world[chunk]["placeable"][data["id"]]["h"] = Stats.return_max_door_health(item_name)
 		rpc("repair",data)
 
+@rpc("call_local", "any_peer", "unreliable")
+func player_upgrade_object(data): 
+	var chunk = Util.return_chunk_from_location(data["l"])
+	if get_parent().world[chunk]["placeable"].has(data["id"]):
+		get_parent().world[chunk]["placeable"][data["id"]]["t"] = data["t"]
+		get_parent().world[chunk]["placeable"][data["id"]]["h"] = Stats.return_max_building_health(data["t"])
+		rpc("upgrade",data)
+
+@rpc
+func upgrade(data): pass
+
 @rpc
 func repair(data): pass
 
