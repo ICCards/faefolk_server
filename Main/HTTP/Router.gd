@@ -2,15 +2,13 @@ extends HttpRouter
 class_name HttpManager
 
 var data = {
-	"world":{},
 	"terrain":{},
-	"server_data":{},
 }
 
-func _init(world,terrain,server_data):
-	data.world = world
+func _init(terrain):
+	#data.world = world
 	data.terrain = terrain
-	data.server_data = server_data
+	#data.server_data = server_data
 # Handle a GET request
 func handle_get(request: HttpRequest, response: HttpResponse):
 	response.json(200, data)

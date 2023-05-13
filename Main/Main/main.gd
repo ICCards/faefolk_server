@@ -48,6 +48,7 @@ func _ready():
 				await get_tree().create_timer(2.0).timeout
 				add_player_character(new_peer_id)
 				await get_tree().create_timer(1.0).timeout
+				rpc_id(new_peer_id,"send_server_data",{"server_data":server_data})
 	)
 	enet_peer.peer_disconnected.connect(
 		func(peer_id):
@@ -60,10 +61,13 @@ func _ready():
 	await get_tree().create_timer(2.0).timeout
 #	set_navigation_tiles()
 
+@rpc("call_remote")
+func send_server_data(data): pass
+
 func start_server():
 	enet_peer.create_server(PORT)
 	multiplayer.multiplayer_peer = enet_peer
-	httpserver.register_router("/getData", HttpManager.new(world,terrain,server_data))
+	httpserver.register_router("/getData", HttpManager.new(terrain))
 	add_child(httpserver)
 	httpserver.start()
 	$Time/Timer.start()
@@ -77,30 +81,39 @@ func add_player_character(peer_id):
 func remove_player_character(peer_id):
 	$Players.get_node(str(peer_id)).queue_free()
 
-func add_mob():
-	var mob = load("res://World/Mobs/bear.tscn").instantiate()
-	$Mobs.add_child(mob)
+#func add_mob():
+#	var mob = load("res://World/Mobs/bear.tscn").instantiate()
+#	$Mobs.add_child(mob)
+#
+#
+#func set_navigation_tiles():
+#	for x in range(250):
+#		for y in range(250):
+#			$NavigationTiles.set_cell(0,Vector2i(x,y),0,Vector2i(0,0),0)
+#	await get_tree().create_timer(1.0).timeout
+#	for x in range(250):
+#		for y in range(250):
+#			$NavigationTiles.set_cell(0,Vector2i(x,y)+Vector2i(250,0),0,Vector2i(0,0),0)
+#	await get_tree().create_timer(1.0).timeout
+#	for x in range(250):
+#		for y in range(250):
+#			$NavigationTiles.set_cell(0,Vector2i(x,y)+Vector2i(250,250),0,Vector2i(0,0),0)
+#	await get_tree().create_timer(1.0).timeout
+#	for x in range(250):
+#		for y in range(250):
+#			$NavigationTiles.set_cell(0,Vector2i(x,y)+Vector2i(0,250),0,Vector2i(0,0),0)
+#	print("FINSIHED")
+#			#await get_tree().process_frame
 
 
-func set_navigation_tiles():
-	for x in range(250):
-		for y in range(250):
-			$NavigationTiles.set_cell(0,Vector2i(x,y),0,Vector2i(0,0),0)
-	await get_tree().create_timer(1.0).timeout
-	for x in range(250):
-		for y in range(250):
-			$NavigationTiles.set_cell(0,Vector2i(x,y)+Vector2i(250,0),0,Vector2i(0,0),0)
-	await get_tree().create_timer(1.0).timeout
-	for x in range(250):
-		for y in range(250):
-			$NavigationTiles.set_cell(0,Vector2i(x,y)+Vector2i(250,250),0,Vector2i(0,0),0)
-	await get_tree().create_timer(1.0).timeout
-	for x in range(250):
-		for y in range(250):
-			$NavigationTiles.set_cell(0,Vector2i(x,y)+Vector2i(0,250),0,Vector2i(0,0),0)
-	print("FINSIHED")
-			#await get_tree().process_frame
+@rpc("call_local", "any_peer", "unreliable")
+func get_chunk_data(peer_id,chunks):
+	for chunk in chunks:
+		rpc_id(int(str(peer_id)),"receive_chunk_data",chunk,world[chunk])
+		await get_tree().create_timer(0.5).timeout
 
+@rpc("call_remote")
+func receive_chunk_data(chunk_name,data): pass
 
 @rpc ("call_local", "any_peer", "unreliable")
 func send_message(data): 
