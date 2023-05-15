@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://djtxaxfadtxf"]
+[gd_scene load_steps=13 format=3 uid="uid://djtxaxfadtxf"]
 
 [ext_resource type="Script" path="res://Main/Main/main.gd" id="1_uqwkr"]
 [ext_resource type="Script" path="res://Main/World/NatureObjects.gd" id="2_c8lrs"]
@@ -8,6 +8,21 @@
 [ext_resource type="Script" path="res://Main/World/GrassObjects.gd" id="6_kgtxj"]
 [ext_resource type="Script" path="res://Main/World/ItemDrops.gd" id="7_xmlu4"]
 [ext_resource type="Script" path="res://Main/World/FarmingTiles.gd" id="8_b43rv"]
+[ext_resource type="Texture2D" uid="uid://dnuq2qkjnbwc8" path="res://CL_MainLev copy.png" id="9_yic35"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ce1ga"]
+vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4jsa"]
+texture = ExtResource("9_yic35")
+0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_ce1ga")
+
+[sub_resource type="TileSet" id="TileSet_ajeuq"]
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetAtlasSource_r4jsa")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_uqwkr")
@@ -51,5 +66,9 @@ spawn_path = NodePath("..")
 
 [node name="FarmingTiles" type="Node" parent="."]
 script = ExtResource("8_b43rv")
+
+[node name="NavigationTiles" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_ajeuq")
+format = 2
 
 [connection signal="timeout" from="Time/Timer" to="Time" method="_on_timer_timeout"]

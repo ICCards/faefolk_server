@@ -58,8 +58,8 @@ func _ready():
 			#connected_peer_ids.remove(i)
 			remove_player_character(peer_id)
 	)
-	await get_tree().create_timer(2.0).timeout
-#	set_navigation_tiles()
+#	await get_tree().create_timer(2.0).timeout
+	#set_navigation_tiles()
 
 @rpc("call_remote")
 func send_server_data(data): pass
@@ -84,26 +84,16 @@ func remove_player_character(peer_id):
 #func add_mob():
 #	var mob = load("res://World/Mobs/bear.tscn").instantiate()
 #	$Mobs.add_child(mob)
-#
-#
-#func set_navigation_tiles():
-#	for x in range(250):
-#		for y in range(250):
-#			$NavigationTiles.set_cell(0,Vector2i(x,y),0,Vector2i(0,0),0)
-#	await get_tree().create_timer(1.0).timeout
-#	for x in range(250):
-#		for y in range(250):
-#			$NavigationTiles.set_cell(0,Vector2i(x,y)+Vector2i(250,0),0,Vector2i(0,0),0)
-#	await get_tree().create_timer(1.0).timeout
-#	for x in range(250):
-#		for y in range(250):
-#			$NavigationTiles.set_cell(0,Vector2i(x,y)+Vector2i(250,250),0,Vector2i(0,0),0)
-#	await get_tree().create_timer(1.0).timeout
-#	for x in range(250):
-#		for y in range(250):
-#			$NavigationTiles.set_cell(0,Vector2i(x,y)+Vector2i(0,250),0,Vector2i(0,0),0)
-#	print("FINSIHED")
-#			#await get_tree().process_frame
+
+
+func set_navigation_tiles():
+	print("start nav")
+	for x in range(1000):
+		for y in range(1000):
+			$NavigationTiles.set_cell(0,Vector2i(x,y),0,Vector2i(0,0),0)
+	await get_tree().create_timer(1.0).timeout
+	for loc in terrain.deep_ocean:
+		$NavigationTiles.erase_cell(0,loc)
 
 
 @rpc("call_local", "any_peer", "unreliable")
