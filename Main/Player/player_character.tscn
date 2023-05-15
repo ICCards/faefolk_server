@@ -21,6 +21,9 @@ properties/4/sync = true
 properties/5/path = NodePath(".:current_footsteps_sound")
 properties/5/spawn = true
 properties/5/sync = true
+properties/6/path = NodePath(".:play_animation_backwards")
+properties/6/spawn = true
+properties/6/sync = true
 
 [node name="player_character" type="Node"]
 script = ExtResource("1_dw6ek")
