@@ -372,14 +372,14 @@ func save_starting_world_data():
 #		var location = locations[index]
 #		if isValidPosition(location):
 #			var id = uuid.v4()
-#			MapData.world["animal"][id] = {"l":location,"n":"bunny","v":rng.randi_range(1,3),"h":Stats.BUNNY_HEALTH}
+#			world["animal"][id] = {"l":location,"n":"bunny","v":rng.randi_range(1,3),"h":Stats.BUNNY_HEALTH}
 #			decoration_locations.append(location)
 #	for _i in range(NUM_BUNNY):
 #		var index = rng.randi_range(0, locations.size() - 1)
 #		var location = locations[index]
 #		if isValidPosition(location):
 #			var id = uuid.v4()
-#			MapData.world["animal"][id] = {"l":location,"n":"duck","v":rng.randi_range(1,3),"h":Stats.DUCK_HEALTH}
+#			world["animal"][id] = {"l":location,"n":"duck","v":rng.randi_range(1,3),"h":Stats.DUCK_HEALTH}
 #			decoration_locations.append(location)
 #	var NUM_BEAR = (locations.size() / 4000)
 #	print("NUM BEARS " + str(NUM_BEAR))

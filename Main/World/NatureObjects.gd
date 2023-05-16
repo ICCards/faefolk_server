@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 
 @rpc ("call_local", "any_peer", "unreliable")
