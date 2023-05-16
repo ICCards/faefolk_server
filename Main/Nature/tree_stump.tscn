@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://h1arl6txkgm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_swdt0"]
+radius = 8.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_4e23h"]
+vertices = PackedVector2Array(-15, 16, -15, -13, -11, -5, -11, 9, 0, 13, 16, 16, 10, 10, 0, -12, -9, -7, -14, -13, 16, -13, 11, -9, 13, 0)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4), PackedInt32Array(5, 0, 4), PackedInt32Array(5, 4, 6), PackedInt32Array(7, 8, 9), PackedInt32Array(7, 9, 10), PackedInt32Array(11, 7, 10), PackedInt32Array(12, 11, 10), PackedInt32Array(12, 10, 5), PackedInt32Array(12, 5, 6)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-14, -13, 16, -13, 16, 16, -15, 16, -15, -13, -11, -5, -11, 9, 0, 13, 10, 10, 13, 0, 11, -9, 0, -12, -9, -7)])
+
+[node name="TreeStump" type="Node2D"]
+
+[node name="MovementCollision" type="StaticBody2D" parent="."]
+collision_layer = 35
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementCollision"]
+shape = SubResource("CircleShape2D_swdt0")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_4e23h")

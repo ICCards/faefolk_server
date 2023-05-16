@@ -18,6 +18,9 @@ properties/3/sync = true
 properties/4/path = NodePath("Sprite2D:position")
 properties/4/spawn = true
 properties/4/sync = true
+properties/5/path = NodePath(".:item_health")
+properties/5/spawn = true
+properties/5/sync = false
 
 [sub_resource type="Animation" id="Animation_pye3l"]
 resource_name = "1"

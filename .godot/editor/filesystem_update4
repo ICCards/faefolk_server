@@ -1,6 +1,8 @@
 res://Main/Main/main.tscn
-res://Main/Mobs/bear.tscn
-res://Main/Player/player_character.tscn
-res://Main/ItemDrop/ItemDrop.tscn
 res://Main/Main/main.gd
-res://Main/Player/player_character.gd
+res://Main/Mobs/duck.tscn
+res://Main/Mobs/duck.gd
+res://Global/helpers/Util.gd
+res://Main/Main/Mobs.gd
+res://Main/World/ItemDrops.gd
+res://Main/ItemDrop/ItemDrop.tscn

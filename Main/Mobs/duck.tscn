@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5cjm8bf72jen"]
+
+[ext_resource type="Script" path="res://Main/Mobs/duck.gd" id="1_u2jge"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iankl"]
+radius = 8.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_34cb2"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:variety")
+properties/1/spawn = true
+properties/1/sync = false
+properties/2/path = NodePath(".:sync_velocity")
+properties/2/spawn = true
+properties/2/sync = true
+
+[node name="Duck" type="CharacterBody2D"]
+script = ExtResource("1_u2jge")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_iankl")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 50.0
+target_desired_distance = 100.0
+avoidance_enabled = true
+max_speed = 50.0
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Timer" type="Timer" parent="Timers"]
+wait_time = 3.0
+autostart = true
+
+[node name="RunStateTimer" type="Timer" parent="Timers"]
+
+[node name="IdleTimer" type="Timer" parent="Timers"]
+
+[node name="DropEggTimer" type="Timer" parent="Timers"]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_34cb2")
