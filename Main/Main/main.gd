@@ -69,8 +69,9 @@ func start_server():
 	add_child(httpserver)
 	httpserver.start()
 	$Time/Timer.start()
-	#set_navigation_tiles()
-	add_mobs()
+#	await get_tree().create_timer(1.0).timeout
+#	set_navigation_tiles()
+
 
 func add_player_character(peer_id):
 	var player_character = load("res://Main/Player/player_character.tscn").instantiate()
@@ -102,33 +103,37 @@ func set_navigation_tiles():
 	print("start nav")
 	for x in range(1000):
 		for y in range(1000):
-#			if not terrain.deep_ocean.has(Vector2i(x,y)):
-			$NavigationTiles.set_cell(0,Vector2(x,y),0,Vector2i(0,0),0)
-#	await get_tree().create_timer(0.5).timeout
-#	print("here")
-#	for loc in terrain.deep_ocean:
-#		$NavigationTiles.erase_cell(0,loc)
+#			dif not terrain.deep_ocean.has(Vector2i(x,y)):
+			$NavigationTiles.set_cell(0,Vector2(x,y),0,Vector2i(0,0))
+		await get_tree().create_timer(0.1).timeout
+	print("NAV TILES " + str($NavigationTiles.get_used_cells(0).size()))
+	print("here")
+	for loc in terrain.deep_ocean:
+		$NavigationTiles.erase_cell(0,loc)
+	print("NAV TILES " + str($NavigationTiles.get_used_cells(0).size()))
 	print("here2")
-#	for chunk in world:
-#		var map = world[chunk]
-#		for id in map["tree"]:
-#			var loc = map["tree"][id]["l"]
-#			add_tree_stump_node(id,loc)
-#			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
-#		for id in map["stump"]:
-#			var loc = map["stump"][id]["l"]
-#			add_tree_stump_node(id,loc)
-#			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
-#		for id in map["log"]:
-#			var loc = map["log"][id]["l"]
-#			remove_nav_tiles(Vector2i(loc))
-#		for id in map["ore_large"]:
-#			var loc = map["ore_large"][id]["l"]
-#			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
-#		for id in map["ore"]:
-#			var loc = map["ore"][id]["l"]
-#			remove_nav_tiles(Vector2i(loc))
-#	add_mobs()
+	for chunk in world:
+		var map = world[chunk]
+		for id in map["tree"]:
+			var loc = map["tree"][id]["l"]
+			add_tree_stump_node(id,loc)
+			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
+		for id in map["stump"]:
+			var loc = map["stump"][id]["l"]
+			add_tree_stump_node(id,loc)
+			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
+		for id in map["log"]:
+			var loc = map["log"][id]["l"]
+			remove_nav_tiles(Vector2i(loc))
+		for id in map["ore_large"]:
+			var loc = map["ore_large"][id]["l"]
+			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
+		for id in map["ore"]:
+			var loc = map["ore"][id]["l"]
+			remove_nav_tiles(Vector2i(loc))
+	print("NAV TILES " + str($NavigationTiles.get_used_cells(0).size()))
+	print("here3")
+	#add_mobs()
 
 func remove_nav_tiles(location, dimensions = Vector2i(1,1)):
 	location = Vector2i(location.x,location.y)
@@ -143,14 +148,6 @@ func add_tree_stump_node(id,loc):
 	treeStump.position = Vector2(loc)*Vector2(16,16)
 	$NatureObjects.call_deferred("add_child",treeStump,true)
 
-@rpc("call_local", "any_peer", "unreliable")
-func get_chunk_data(peer_id,chunks):
-	for chunk in chunks:
-		rpc_id(int(str(peer_id)),"receive_chunk_data",chunk,world[chunk])
-		await get_tree().create_timer(0.5).timeout
-
-@rpc("call_remote")
-func receive_chunk_data(chunk_name,data): pass
 
 @rpc ("call_local", "any_peer", "unreliable")
 func send_message(data): 

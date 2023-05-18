@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://djtxaxfadtxf"]
+[gd_scene load_steps=15 format=3 uid="uid://djtxaxfadtxf"]
 
 [ext_resource type="Script" path="res://Main/Main/main.gd" id="1_uqwkr"]
 [ext_resource type="Script" path="res://Main/World/NatureObjects.gd" id="2_c8lrs"]
@@ -10,8 +10,9 @@
 [ext_resource type="Script" path="res://Main/World/FarmingTiles.gd" id="8_b43rv"]
 [ext_resource type="Script" path="res://Main/Main/Mobs.gd" id="8_togis"]
 [ext_resource type="Texture2D" uid="uid://dnuq2qkjnbwc8" path="res://CL_MainLev copy.png" id="9_yic35"]
+[ext_resource type="Script" path="res://Main/World/WorldBuilder.gd" id="11_vlg6q"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_xvkyt"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_lmslf"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
@@ -19,7 +20,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4jsa"]
 texture = ExtResource("9_yic35")
 0:0/0 = 0
-0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_xvkyt")
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_lmslf")
 
 [sub_resource type="TileSet" id="TileSet_ajeuq"]
 navigation_layer_0/layers = 1
@@ -72,5 +73,8 @@ script = ExtResource("8_b43rv")
 [node name="NavigationTiles" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ajeuq")
 format = 2
+
+[node name="WorldBuilder" type="Node" parent="."]
+script = ExtResource("11_vlg6q")
 
 [connection signal="timeout" from="Time/Timer" to="Time" method="_on_timer_timeout"]
