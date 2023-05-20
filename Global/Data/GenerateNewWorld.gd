@@ -174,12 +174,16 @@ func build_world():
 	generate_weeds(forest,"forest")
 	generate_weeds(plains,"plains")
 	generate_beach_forage(beach)
-	fix_tiles()
+	save_tiles()
+	#fix_tiles()
 	##################
 
 
 func build_terrian():
 	print("BUILDING")
+#	for x in range(100):
+#		for y in range(100):
+#			forest.append(Vector2i(x,y))
 	for x in width:
 		for y in height:
 			var pos = Vector2i(x,y)
@@ -372,14 +376,14 @@ func save_starting_world_data():
 #		var location = locations[index]
 #		if isValidPosition(location):
 #			var id = uuid.v4()
-#			MapData.world["animal"][id] = {"l":location,"n":"bunny","v":rng.randi_range(1,3),"h":Stats.BUNNY_HEALTH}
+#			world["animal"][id] = {"l":location,"n":"bunny","v":rng.randi_range(1,3),"h":Stats.BUNNY_HEALTH}
 #			decoration_locations.append(location)
 #	for _i in range(NUM_BUNNY):
 #		var index = rng.randi_range(0, locations.size() - 1)
 #		var location = locations[index]
 #		if isValidPosition(location):
 #			var id = uuid.v4()
-#			MapData.world["animal"][id] = {"l":location,"n":"duck","v":rng.randi_range(1,3),"h":Stats.DUCK_HEALTH}
+#			world["animal"][id] = {"l":location,"n":"duck","v":rng.randi_range(1,3),"h":Stats.DUCK_HEALTH}
 #			decoration_locations.append(location)
 #	var NUM_BEAR = (locations.size() / 4000)
 #	print("NUM BEARS " + str(NUM_BEAR))
@@ -566,6 +570,7 @@ func generate_trees(locations,biome):
 		var index = rng.randi_range(0, locations.size() - 1)
 		var location = locations[index]
 		create_log(location,biome)
+
 
 func create_tree(loc,biome):
 	var id = uuid.v4()

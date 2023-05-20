@@ -211,34 +211,48 @@ func return_chunk_from_location(loc):
 	return row+str(column)
 
 
-func return_autotile_id(autotile):
-	match autotile:
-		Vector2i(30,17):
-			return 0
-		Vector2i(24,14):
-			return 1
-		Vector2i(25,14):
-			return 2
-		Vector2i(25,15):
-			return 3
-		Vector2i(24,15):
-			return 4
-		Vector2i(30,16):
-			return 5
-		Vector2i(33,17):
-			return 6
-		Vector2i(30,20):
-			return 7
-		Vector2i(29,17):
-			return 8
-		Vector2i(29,16):
-			return 9
-		Vector2i(33,16):
-			return 10
-		Vector2i(33,20):
-			return 11
-		Vector2i(29,20):
-			return 12
+func get_random_idle_pos(pos,max_move_dist):
+	var random1 = randf_range(max_move_dist/2,max_move_dist)
+	var random2 = randf_range(max_move_dist/2,max_move_dist)
+	if Util.chance(50):
+		random1*=-1
+	if Util.chance(50):
+		random2*=-1
+	if get_node("/root/Main/NavigationTiles").get_cell_atlas_coords(0,(pos+Vector2(random1,random2))/16) != Vector2i(-1,-1):
+		return pos+Vector2(random1,random2)
+	elif get_node("/root/Main/NavigationTiles").get_cell_atlas_coords(0,(pos+Vector2(random1,random2))/16) !=  Vector2i(-1,-1):
+		return pos-Vector2(random1,random2)
+	else:
+		return pos
+
+#func return_autotile_id(autotile):
+#	match autotile:
+#		Vector2i(30,17):
+#			return 0
+#		Vector2i(24,14):
+#			return 1
+#		Vector2i(25,14):
+#			return 2
+#		Vector2i(25,15):
+#			return 3
+#		Vector2i(24,15):
+#			return 4
+#		Vector2i(30,16):
+#			return 5
+#		Vector2i(33,17):
+#			return 6
+#		Vector2i(30,20):
+#			return 7
+#		Vector2i(29,17):
+#			return 8
+#		Vector2i(29,16):
+#			return 9
+#		Vector2i(33,16):
+#			return 10
+#		Vector2i(33,20):
+#			return 11
+#		Vector2i(29,20):
+#			return 12
 #	var array = [0,0,0,0,0,0,0,0]
 #	if tiles.has(loc+Vector2i(-1,-1)):
 #		array[0] = 1

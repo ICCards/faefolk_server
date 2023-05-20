@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt0rbs8rcvsa0"]
+
+[ext_resource type="Script" path="res://Main/Mobs/bunny.gd" id="1_5nlxu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_evaao"]
+radius = 4.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_10pqa"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:sync_velocity")
+properties/1/spawn = true
+properties/1/sync = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ingjk"]
+radius = 5.0
+
+[node name="Bunny" type="CharacterBody2D"]
+script = ExtResource("1_5nlxu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_evaao")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 4.0
+avoidance_enabled = true
+radius = 16.0
+max_speed = 50.0
+debug_enabled = true
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Timer" type="Timer" parent="Timers"]
+wait_time = 3.0
+autostart = true
+
+[node name="RunStateTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_10pqa")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(2.08165e-12, -2)
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_ingjk")
+
+[connection signal="timeout" from="Timers/RunStateTimer" to="." method="_on_run_state_timer_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

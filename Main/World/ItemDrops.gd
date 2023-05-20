@@ -7,7 +7,10 @@ func add_item_drop(item: Array, pos: Vector2):
 	var itemDrop = ItemDrop.instantiate()
 	itemDrop.item_name = item[0]
 	itemDrop.item_quantity = item[1]
-#itemDrop.item_health = item[2]
+	if item.size() == 2 or item[2] == null:
+		itemDrop.item_health = 0
+	else:
+		itemDrop.item_health = item[2]
 	itemDrop.position = pos + Vector2(randi_range(-6, 6), randi_range(-6, 6))
 	add_child(itemDrop,true)
 
