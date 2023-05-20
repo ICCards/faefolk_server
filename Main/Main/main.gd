@@ -25,6 +25,7 @@ var terrain = {}
 var game_state: GameState
 
 func _ready():
+	randomize()
 	server_ip = IP.resolve_hostname(str(OS.get_environment("HOSTNAME")),1)
 	print(isPVP)
 	print(server_pop)
@@ -70,13 +71,13 @@ func start_server():
 	httpserver.start()
 	$Time/Timer.start()
 #	await get_tree().create_timer(1.0).timeout
-#	set_navigation_tiles()
+	set_navigation_tiles()
 
 
 func add_player_character(peer_id):
 	var player_character = load("res://Main/Player/player_character.tscn").instantiate()
 	player_character.set_multiplayer_authority(peer_id)
-	$Players.add_child(player_character)
+	$Players.add_child(player_character,true)
 	Constants.player = player_character
 
 func remove_player_character(peer_id):
@@ -87,25 +88,29 @@ func add_mobs():
 	var locations = terrain.plains + terrain.forest + terrain.snow + terrain.dirt + terrain.desert
 	var NUM_DUCKS = int(locations.size() / 600)
 	print("NUM DUCKS " + str(NUM_DUCKS))
-	for _i in range(NUM_DUCKS):
+	for _i in range(NUM_DUCKS*2):
 		var index = randi_range(0, locations.size() - 1)
 		var location = locations[index]
-#		var id = uuid.v4()
-#		world["animal"][id] = {"l":location,"n":"bunny","v":rng.randi_range(1,3),"h":Stats.BUNNY_HEALTH}
-#		decoration_locations.append(location)
 		var duck = load("res://Main/Mobs/duck.tscn").instantiate()
 		duck.health = Stats.BUNNY_HEALTH
 		duck.global_position = Vector2(location)*Vector2(16,16)
 		$Mobs.add_child(duck,true)
+	for _i in range(NUM_DUCKS*2):
+		var index = randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		var bunny = load("res://Main/Mobs/bunny.tscn").instantiate()
+		bunny.health = Stats.BUNNY_HEALTH
+		bunny.global_position = Vector2(location)*Vector2(16,16)
+		$Mobs.add_child(bunny,true)
 
 
 func set_navigation_tiles():
 	print("start nav")
-	for x in range(1000):
-		for y in range(1000):
+	for x in range(100):
+		for y in range(100):
+		#	if x % 25 != 0 and y % 25 != 0:
 #			dif not terrain.deep_ocean.has(Vector2i(x,y)):
 			$NavigationTiles.set_cell(0,Vector2(x,y),0,Vector2i(0,0))
-		await get_tree().create_timer(0.1).timeout
 	print("NAV TILES " + str($NavigationTiles.get_used_cells(0).size()))
 	print("here")
 	for loc in terrain.deep_ocean:
@@ -116,24 +121,27 @@ func set_navigation_tiles():
 		var map = world[chunk]
 		for id in map["tree"]:
 			var loc = map["tree"][id]["l"]
-			add_tree_stump_node(id,loc)
+			PlaceObject.place_tree_stump_node(id,loc)
 			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
 		for id in map["stump"]:
 			var loc = map["stump"][id]["l"]
-			add_tree_stump_node(id,loc)
+			PlaceObject.place_tree_stump_node(id,loc)
 			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
 		for id in map["log"]:
 			var loc = map["log"][id]["l"]
 			remove_nav_tiles(Vector2i(loc))
+			PlaceObject.place_log_node(id,loc)
 		for id in map["ore_large"]:
 			var loc = map["ore_large"][id]["l"]
 			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
+			PlaceObject.place_large_ore_node(id,loc)
 		for id in map["ore"]:
 			var loc = map["ore"][id]["l"]
 			remove_nav_tiles(Vector2i(loc))
+			PlaceObject.place_small_ore_node(id,loc)
 	print("NAV TILES " + str($NavigationTiles.get_used_cells(0).size()))
 	print("here3")
-	#add_mobs()
+	add_mobs()
 
 func remove_nav_tiles(location, dimensions = Vector2i(1,1)):
 	location = Vector2i(location.x,location.y)
@@ -141,12 +149,6 @@ func remove_nav_tiles(location, dimensions = Vector2i(1,1)):
 		for y in range(dimensions.y):
 			$NavigationTiles.erase_cell(0,location+Vector2i(x,-y))
 
-
-func add_tree_stump_node(id,loc):
-	var treeStump = load("res://Main/Nature/tree_stump.tscn").instantiate()
-	treeStump.name = id
-	treeStump.position = Vector2(loc)*Vector2(16,16)
-	$NatureObjects.call_deferred("add_child",treeStump,true)
 
 
 @rpc ("call_local", "any_peer", "unreliable")

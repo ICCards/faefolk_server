@@ -20,6 +20,7 @@ Constants="*res://Global/Data/Constants.gd"
 Stats="*res://Global/Data/Stats.gd"
 Util="*res://Global/helpers/Util.gd"
 GenerateNewWorld="*res://Global/Data/GenerateNewWorld.gd"
+PlaceObject="*res://Global/Data/PlaceObject.gd"
 
 [dotnet]
 

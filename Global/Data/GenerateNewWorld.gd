@@ -174,12 +174,16 @@ func build_world():
 	generate_weeds(forest,"forest")
 	generate_weeds(plains,"plains")
 	generate_beach_forage(beach)
-	fix_tiles()
+	save_tiles()
+	#fix_tiles()
 	##################
 
 
 func build_terrian():
 	print("BUILDING")
+#	for x in range(100):
+#		for y in range(100):
+#			forest.append(Vector2i(x,y))
 	for x in width:
 		for y in height:
 			var pos = Vector2i(x,y)
@@ -566,6 +570,7 @@ func generate_trees(locations,biome):
 		var index = rng.randi_range(0, locations.size() - 1)
 		var location = locations[index]
 		create_log(location,biome)
+
 
 func create_tree(loc,biome):
 	var id = uuid.v4()
