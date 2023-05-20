@@ -10,3 +10,5 @@ func forage_object_picked_up(id,loc):
 
 @rpc
 func destroy_forage_object(data): pass
+
+

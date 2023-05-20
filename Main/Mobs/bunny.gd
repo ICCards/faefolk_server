@@ -19,7 +19,6 @@ func _ready():
 	randomize()
 	_timer.wait_time = randf_range(5.0,10.0)
 	_timer.connect("timeout",Callable(self,"_update_pathfinding"))
-	$Timers/DropEggTimer.wait_time = randf_range(60, 180)
 
 func _physics_process(delta):
 	if navigation_agent.is_target_reached() or not navigation_agent.is_target_reachable() or destroyed:
@@ -80,9 +79,7 @@ func hit(data):
 			destroyed = true
 			get_parent().rpc("destroy_mob",data)
 			await get_tree().create_timer(1.0).timeout
-			get_node("../../ItemDrops").add_item_drop(["raw wing",1], position)
-			if Util.chance(50):
-				get_node("../../ItemDrops").add_item_drop(["raw egg",1], position) 
+			get_node("../../ItemDrops").add_item_drop(["raw filet",1], position)
 			call_deferred("queue_free")
 
 
@@ -97,14 +94,6 @@ func start_running_state():
 func _on_run_state_timer_timeout():
 	running_state = false
 
-func _on_drop_egg_timer_timeout():
-	if destroyed or velocity == Vector2.ZERO:
-		return
-	drop_egg()
-
-func start_eating_state(): pass
-
-func drop_egg(): pass
 
 
 func _on_hurtbox_area_entered(area):

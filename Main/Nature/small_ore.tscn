@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4du1b1bxhucm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jdy8u"]
+radius = 8.0
+
+[node name="small_ore" type="Node2D"]
+
+[node name="SmallMovementCollision" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallMovementCollision"]
+shape = SubResource("CircleShape2D_jdy8u")

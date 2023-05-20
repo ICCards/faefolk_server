@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://djtxaxfadtxf"]
+[gd_scene load_steps=16 format=3 uid="uid://djtxaxfadtxf"]
 
 [ext_resource type="Script" path="res://Main/Main/main.gd" id="1_uqwkr"]
 [ext_resource type="Script" path="res://Main/World/NatureObjects.gd" id="2_c8lrs"]
@@ -10,8 +10,10 @@
 [ext_resource type="Script" path="res://Main/World/FarmingTiles.gd" id="8_b43rv"]
 [ext_resource type="Script" path="res://Main/Main/Mobs.gd" id="8_togis"]
 [ext_resource type="Texture2D" uid="uid://dnuq2qkjnbwc8" path="res://CL_MainLev copy.png" id="9_yic35"]
+[ext_resource type="Script" path="res://Main/World/WorldBuilder.gd" id="11_vlg6q"]
+[ext_resource type="Script" path="res://Main/World/Projectiles.gd" id="11_w8056"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_xvkyt"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_j8bgu"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
@@ -19,22 +21,25 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4jsa"]
 texture = ExtResource("9_yic35")
 0:0/0 = 0
-0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_xvkyt")
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_j8bgu")
 
 [sub_resource type="TileSet" id="TileSet_ajeuq"]
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_r4jsa")
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node"]
 script = ExtResource("1_uqwkr")
 
-[node name="Players" type="Node" parent="."]
+[node name="WorldBuilder" type="Node" parent="."]
+script = ExtResource("11_vlg6q")
+
+[node name="Players" type="Node2D" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
 _spawnable_scenes = PackedStringArray("res://Main/Player/player_character.tscn")
 spawn_path = NodePath("..")
 
-[node name="NatureObjects" type="Node2D" parent="."]
+[node name="NatureObjects" type="Node" parent="."]
 script = ExtResource("2_c8lrs")
 
 [node name="Time" type="Node" parent="."]
@@ -52,6 +57,13 @@ script = ExtResource("5_jkprs")
 [node name="GrassObjects" type="Node" parent="."]
 script = ExtResource("6_kgtxj")
 
+[node name="Projectiles" type="Node" parent="."]
+script = ExtResource("11_w8056")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Projectiles"]
+_spawnable_scenes = PackedStringArray("res://Main/Projectiles/arrow_projectile.tscn")
+spawn_path = NodePath("..")
+
 [node name="ItemDrops" type="Node" parent="."]
 script = ExtResource("7_xmlu4")
 
@@ -59,11 +71,11 @@ script = ExtResource("7_xmlu4")
 _spawnable_scenes = PackedStringArray("res://Main/ItemDrop/ItemDrop.tscn")
 spawn_path = NodePath("..")
 
-[node name="Mobs" type="Node2D" parent="."]
+[node name="Mobs" type="Node" parent="."]
 script = ExtResource("8_togis")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Mobs"]
-_spawnable_scenes = PackedStringArray("res://Main/Mobs/duck.tscn")
+_spawnable_scenes = PackedStringArray("res://Main/Mobs/duck.tscn", "res://Main/Mobs/bunny.tscn")
 spawn_path = NodePath("..")
 
 [node name="FarmingTiles" type="Node" parent="."]
@@ -72,5 +84,9 @@ script = ExtResource("8_b43rv")
 [node name="NavigationTiles" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ajeuq")
 format = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(708, 410)
+zoom = Vector2(2, 2)
 
 [connection signal="timeout" from="Time/Timer" to="Time" method="_on_timer_timeout"]

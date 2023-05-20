@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnspgy520wwsl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cbdti"]
+radius = 9.0
+height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7tvsi"]
+radius = 8.0
+
+[node name="large_ore" type="Node2D"]
+
+[node name="BigMovementCollision" type="StaticBody2D" parent="."]
+position = Vector2(2.08165e-12, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BigMovementCollision"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_cbdti")
+
+[node name="SmallMovementCollision" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallMovementCollision"]
+shape = SubResource("CircleShape2D_7tvsi")
