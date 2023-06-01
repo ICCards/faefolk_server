@@ -181,9 +181,10 @@ func build_world():
 
 func build_terrian():
 	print("BUILDING")
-#	for x in range(100):
-#		for y in range(100):
-#			forest.append(Vector2i(x,y))
+	for x in range(100):
+		for y in range(100):
+			forest.append(Vector2i(x,y))
+	return
 	for x in width:
 		for y in height:
 			var pos = Vector2i(x,y)

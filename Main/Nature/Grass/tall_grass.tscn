@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bulp6plyahb1u"]
+
+[ext_resource type="Script" path="res://Main/Nature/Grass/tall_grass.gd" id="1_lhtcy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_raet2"]
+radius = 3.0
+
+[node name="tall_grass" type="Node2D"]
+script = ExtResource("1_lhtcy")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(2.08165e-12, 4)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_raet2")
+
+[node name="BackArea2D" type="Area2D" parent="."]
+position = Vector2(2.08165e-12, -4)
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackArea2D"]
+shape = SubResource("CircleShape2D_raet2")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="BackArea2D" to="." method="_on_back_area_2d_area_entered"]

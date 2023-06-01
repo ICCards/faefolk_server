@@ -88,14 +88,14 @@ func add_mobs():
 	var locations = terrain.plains + terrain.forest + terrain.snow + terrain.dirt + terrain.desert
 	var NUM_DUCKS = int(locations.size() / 600)
 	print("NUM DUCKS " + str(NUM_DUCKS))
-	for _i in range(NUM_DUCKS*2):
+	for _i in range(NUM_DUCKS):
 		var index = randi_range(0, locations.size() - 1)
 		var location = locations[index]
 		var duck = load("res://Main/Mobs/duck.tscn").instantiate()
 		duck.health = Stats.BUNNY_HEALTH
 		duck.global_position = Vector2(location)*Vector2(16,16)
 		$Mobs.add_child(duck,true)
-	for _i in range(NUM_DUCKS*2):
+	for _i in range(NUM_DUCKS):
 		var index = randi_range(0, locations.size() - 1)
 		var location = locations[index]
 		var bunny = load("res://Main/Mobs/bunny.tscn").instantiate()
@@ -108,37 +108,37 @@ func set_navigation_tiles():
 	print("start nav")
 	for x in range(100):
 		for y in range(100):
-		#	if x % 25 != 0 and y % 25 != 0:
+			if x % 25 != 0 and y % 25 != 0:
 #			dif not terrain.deep_ocean.has(Vector2i(x,y)):
-			$NavigationTiles.set_cell(0,Vector2(x,y),0,Vector2i(0,0))
-	print("NAV TILES " + str($NavigationTiles.get_used_cells(0).size()))
-	print("here")
-	for loc in terrain.deep_ocean:
-		$NavigationTiles.erase_cell(0,loc)
-	print("NAV TILES " + str($NavigationTiles.get_used_cells(0).size()))
-	print("here2")
-	for chunk in world:
-		var map = world[chunk]
-		for id in map["tree"]:
-			var loc = map["tree"][id]["l"]
-			PlaceObject.place_tree_stump_node(id,loc)
-			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
-		for id in map["stump"]:
-			var loc = map["stump"][id]["l"]
-			PlaceObject.place_tree_stump_node(id,loc)
-			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
-		for id in map["log"]:
-			var loc = map["log"][id]["l"]
-			remove_nav_tiles(Vector2i(loc))
-			PlaceObject.place_log_node(id,loc)
-		for id in map["ore_large"]:
-			var loc = map["ore_large"][id]["l"]
-			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
-			PlaceObject.place_large_ore_node(id,loc)
-		for id in map["ore"]:
-			var loc = map["ore"][id]["l"]
-			remove_nav_tiles(Vector2i(loc))
-			PlaceObject.place_small_ore_node(id,loc)
+				$NavigationTiles.set_cell(0,Vector2(x,y),0,Vector2i(0,0))
+#	for loc in terrain.deep_ocean:
+#		$NavigationTiles.erase_cell(0,loc)
+#	print("NAV TILES " + str($NavigationTiles.get_used_cells(0).size()))
+#	print("here2")
+#	for chunk in world:
+#		var map = world[chunk]
+#		for id in map["tree"]:
+#			var loc = map["tree"][id]["l"]
+#			PlaceObject.place_tree_stump_node(id,"tree",loc)
+#			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
+#		for id in map["stump"]:
+#			var loc = map["stump"][id]["l"]
+#			PlaceObject.place_tree_stump_node(id,"stump",loc)
+#			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
+#		for id in map["log"]:
+#			var loc = map["log"][id]["l"]
+#			remove_nav_tiles(Vector2i(loc))
+#			PlaceObject.place_log_node(id,loc)
+#		for id in map["ore_large"]:
+#			var loc = map["ore_large"][id]["l"]
+#			remove_nav_tiles(Vector2i(loc)+Vector2i(-1,0), Vector2i(2,2))
+#			PlaceObject.place_large_ore_node(id,loc)
+#		for id in map["ore"]:
+#			var loc = map["ore"][id]["l"]
+#			remove_nav_tiles(Vector2i(loc))
+#			PlaceObject.place_small_ore_node(id,loc)
+#		for id in map["tall_grass"]:
+#			var loc = map["ore"][id]["l"]
 	print("NAV TILES " + str($NavigationTiles.get_used_cells(0).size()))
 	print("here3")
 	add_mobs()
@@ -150,11 +150,4 @@ func remove_nav_tiles(location, dimensions = Vector2i(1,1)):
 			$NavigationTiles.erase_cell(0,location+Vector2i(x,-y))
 
 
-
-@rpc ("call_local", "any_peer", "unreliable")
-func send_message(data): 
-	rpc("receive_message",data)
-	
-@rpc
-func receive_message(data): pass
 

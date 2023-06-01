@@ -12,21 +12,12 @@ properties/1/sync = true
 properties/2/path = NodePath(".:tool_name")
 properties/2/spawn = true
 properties/2/sync = true
-properties/3/path = NodePath(".:footstep_stream_paused")
+properties/3/path = NodePath(".:position")
 properties/3/spawn = true
 properties/3/sync = true
-properties/4/path = NodePath(".:position")
+properties/4/path = NodePath(".:holding_item_name")
 properties/4/spawn = true
 properties/4/sync = true
-properties/5/path = NodePath(".:current_footsteps_sound")
-properties/5/spawn = true
-properties/5/sync = true
-properties/6/path = NodePath(".:play_animation_backwards")
-properties/6/spawn = true
-properties/6/sync = true
-properties/7/path = NodePath(".:walk_legs")
-properties/7/spawn = true
-properties/7/sync = true
 
 [node name="player_character" type="Node"]
 script = ExtResource("1_dw6ek")

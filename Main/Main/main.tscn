@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://djtxaxfadtxf"]
+[gd_scene load_steps=17 format=3 uid="uid://djtxaxfadtxf"]
 
 [ext_resource type="Script" path="res://Main/Main/main.gd" id="1_uqwkr"]
 [ext_resource type="Script" path="res://Main/World/NatureObjects.gd" id="2_c8lrs"]
 [ext_resource type="Script" path="res://Main/World/Time.gd" id="3_1dcut"]
+[ext_resource type="Script" path="res://Main/World/Players.gd" id="3_6i4st"]
 [ext_resource type="Script" path="res://Main/World/PlaceableObjects.gd" id="4_bwgs6"]
 [ext_resource type="Script" path="res://Main/World/ForageObjects.gd" id="5_jkprs"]
 [ext_resource type="Script" path="res://Main/World/GrassObjects.gd" id="6_kgtxj"]
@@ -34,6 +35,7 @@ script = ExtResource("1_uqwkr")
 script = ExtResource("11_vlg6q")
 
 [node name="Players" type="Node2D" parent="."]
+script = ExtResource("3_6i4st")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
 _spawnable_scenes = PackedStringArray("res://Main/Player/player_character.tscn")
@@ -61,7 +63,7 @@ script = ExtResource("6_kgtxj")
 script = ExtResource("11_w8056")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Projectiles"]
-_spawnable_scenes = PackedStringArray("res://Main/Projectiles/arrow_projectile.tscn")
+_spawnable_scenes = PackedStringArray("res://Main/Projectiles/arrow_projectile.tscn", "res://Main/Projectiles/wind/tornado_projectile.tscn", "res://Main/Projectiles/wind/lingering_tornado.tscn")
 spawn_path = NodePath("..")
 
 [node name="ItemDrops" type="Node" parent="."]

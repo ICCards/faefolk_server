@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bydvreyxvdrbp"]
+
+[ext_resource type="Script" path="res://Main/Lobby/lobby.gd" id="1_go0ja"]
+[ext_resource type="Script" path="res://Main/World/Players.gd" id="2_abnmr"]
+[ext_resource type="Script" path="res://Main/World/Time.gd" id="3_ccq1p"]
+[ext_resource type="Script" path="res://Main/World/Projectiles.gd" id="4_3rvkh"]
+
+[node name="lobby" type="Node2D"]
+script = ExtResource("1_go0ja")
+
+[node name="Players" type="Node2D" parent="."]
+script = ExtResource("2_abnmr")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
+_spawnable_scenes = PackedStringArray("res://Main/Player/player_character.tscn")
+spawn_path = NodePath("..")
+
+[node name="Time" type="Node" parent="."]
+script = ExtResource("3_ccq1p")
+
+[node name="Timer" type="Timer" parent="Time"]
+wait_time = 3.0
+
+[node name="Projectiles" type="Node" parent="."]
+script = ExtResource("4_3rvkh")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Projectiles"]
+_spawnable_scenes = PackedStringArray("res://Main/Projectiles/arrow_projectile.tscn", "res://Main/Projectiles/wind/tornado_projectile.tscn", "res://Main/Projectiles/wind/lingering_tornado.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="timeout" from="Time/Timer" to="Time" method="_on_timer_timeout"]

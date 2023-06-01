@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://h1arl6txkgm"]
+[gd_scene load_steps=5 format=3 uid="uid://dl2d3hbx62mxr"]
+
+[ext_resource type="Script" path="res://Main/Nature/tree/tree_object.gd" id="1_huv2n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_swdt0"]
 radius = 8.0
@@ -9,8 +11,10 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(-14, -13, 16, -13, 16, 16, -15, 16, -15, -13, -11, -5, -11, 9, 0, 13, 10, 10, 13, 0, 11, -9, 0, -12, -9, -7)])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vsxus"]
+size = Vector2(22, 22)
 
-[node name="TreeStump" type="Node2D"]
+[node name="tree_stump_object" type="Node2D"]
+script = ExtResource("1_huv2n")
 
 [node name="MovementCollision" type="StaticBody2D" parent="."]
 collision_layer = 35
@@ -22,9 +26,11 @@ shape = SubResource("CircleShape2D_swdt0")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_4e23h")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_vsxus")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

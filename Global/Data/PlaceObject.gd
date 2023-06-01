@@ -1,16 +1,19 @@
 extends Node
 
 
-func place_tree_stump_node(id,loc):
+func place_tree_stump_node(id,type,loc):
 	var NatureObjects = get_node("/root/Main/NatureObjects")
-	var treeStump = load("res://Main/Nature/tree_stump.tscn").instantiate()
-	treeStump.name = id
-	treeStump.position = Vector2(loc)*16
-	NatureObjects.call_deferred("add_child",treeStump,true)
+	var tree = load("res://Main/Nature/tree/tree_object.tscn").instantiate()
+	tree.type = type
+	tree.location = loc
+	tree.name = id
+	tree.position = Vector2(loc)*16
+	NatureObjects.call_deferred("add_child",tree,true)
 	
 func place_log_node(id,loc):
 	var NatureObjects = get_node("/root/Main/NatureObjects")
-	var log = load("res://Main/Nature/log.tscn").instantiate()
+	var log = load("res://Main/Nature/tree/log.tscn").instantiate()
+	log.location = loc
 	log.name = id
 	log.position = Vector2(loc)*16 + Vector2(8,8)
 	NatureObjects.call_deferred("add_child",log,true)
